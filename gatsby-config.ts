@@ -21,6 +21,7 @@ const config: GatsbyConfig = {
         theme_color: `#1c1d21`,
         display: `standalone`,
         icon: `src/images/icon.png`,
+        description: "Open source projects by Facundo Leites",
       },
     },
   ],

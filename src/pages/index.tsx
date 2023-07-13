@@ -79,6 +79,7 @@ const IndexPage: React.FC<PageProps> = () => {
             <a
               href="https://github.com/felicetteapp/recipes-backend"
               target="_blank"
+              rel="noopener"
             >
               github.com/felicetteapp/recipes-backend
             </a>
@@ -87,6 +88,7 @@ const IndexPage: React.FC<PageProps> = () => {
             <a
               href="https://github.com/felicetteapp/recipes-frontend"
               target="_blank"
+              rel="noopener"
             >
               github.com/felicetteapp/recipes-frontend
             </a>
@@ -96,6 +98,7 @@ const IndexPage: React.FC<PageProps> = () => {
             className="main__article__sub-item__value"
             href="https://recipes.felicette.app"
             target="_blank"
+            rel="noopener"
           >
             recipes.felicette.app
           </a>
@@ -111,7 +114,7 @@ const IndexPage: React.FC<PageProps> = () => {
             </p>
           </section>
           <section className="footer__main__section footer__main__section--img">
-            <img src={felicettePj} />
+            <img src={felicettePj} alt="felicette" />
           </section>
         </main>
       </footer>
@@ -120,3 +123,15 @@ const IndexPage: React.FC<PageProps> = () => {
 };
 
 export default IndexPage;
+
+export const Head = () => {
+  return (
+    <>
+      <title>Felicette</title>
+      <meta
+        name="description"
+        content="Open source projects by Facundo Leites"
+      />
+    </>
+  );
+};
