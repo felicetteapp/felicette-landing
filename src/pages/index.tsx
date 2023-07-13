@@ -76,12 +76,29 @@ const IndexPage: React.FC<PageProps> = () => {
             código fonte
           </section>
           <section className="main__article__sub-item__value">
-            https://github.com/felicetteapp/recipes
+            <a
+              href="https://github.com/felicetteapp/recipes-backend"
+              target="_blank"
+            >
+              github.com/felicetteapp/recipes-backend
+            </a>
+            <br />
+            <br />
+            <a
+              href="https://github.com/felicetteapp/recipes-frontend"
+              target="_blank"
+            >
+              github.com/felicetteapp/recipes-frontend
+            </a>
           </section>
           <section className="main__article__sub-item__label">ver mais</section>
-          <section className="main__article__sub-item__value">
-            https://recipes.felicette.app
-          </section>
+          <a
+            className="main__article__sub-item__value"
+            href="https://recipes.felicette.app"
+            target="_blank"
+          >
+            recipes.felicette.app
+          </a>
         </article>
       </main>
       <footer className="footer">
@@ -93,7 +110,7 @@ const IndexPage: React.FC<PageProps> = () => {
               amor e gatos desde Curitiba, Brasil
             </p>
           </section>
-          <section className="footer__main__section">
+          <section className="footer__main__section footer__main__section--img">
             <img src={felicettePj} />
           </section>
         </main>

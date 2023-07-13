@@ -23,7 +23,7 @@ body {
 }
 
 .wrapper {
-  max-width: min(100%, 600px);
+  max-width: min(100%, 900px);
   padding: 1rem;
   margin: 0 auto;
 }
@@ -213,6 +213,10 @@ body {
         padding-bottom: 1rem;
         max-width: 100%;
         overflow: hidden;
+        color: inherit;
+        a {
+          color: inherit;
+        }
       }
       &__label {
         text-align: right;
@@ -265,23 +269,35 @@ body {
 
     &__section {
       position: relative;
-      grid-column-start: span 2;
       &--text {
+        grid-column-start: span 2;
         color: $color-fg;
         margin-top: -2rem;
         margin-bottom: -1rem;
+
+        @media screen and (min-width: 600px) {
+          grid-column-start: 2;
+          grid-column-end: span 2;
+        }
 
         strong {
           font-family: $font-secondary;
           font-weight: normal;
         }
       }
-    }
 
-    img {
-      margin-top: -25vh;
-      max-width: 100%;
-      max-height: 70vh;
+      &--img {
+        grid-column-start: span 2;
+        @media screen and (min-width: 600px) {
+          grid-column-start: 4;
+        }
+
+        img {
+          margin-top: -25vh;
+          max-width: 100%;
+          max-height: 70vh;
+        }
+      }
     }
   }
 }
