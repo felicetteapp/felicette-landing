@@ -24,6 +24,14 @@ const config: GatsbyConfig = {
         description: "Open source projects by Facundo Leites",
       },
     },
+    {
+      resolve: "gatsby-plugin-i18n",
+      options: {
+        langKeyDefault: "en",
+        useLangKeyLayout: false,
+        
+      },
+    },
   ],
 };
 

@@ -109,6 +109,7 @@ body {
         border: none;
         font-size: inherit;
         font-family: inherit;
+        text-decoration: none;
 
         &:active {
           color: $color-bg;
@@ -127,11 +128,16 @@ body {
         }
 
         &__wrapper {
-          white-space: nowrap;
           max-width: 100%;
-          overflow: hidden;
-          overflow-x: auto;
           padding-right: 1rem;
+          text-align: left;
+
+          @media (hover: none) {
+            white-space: nowrap;
+            overflow: hidden;
+            overflow-x: auto;
+            background: green;
+          }
         }
       }
     }
@@ -225,6 +231,16 @@ body {
       &__value {
         font-weight: 700;
         text-overflow: ellipsis;
+
+        &__link {
+          display: block;
+
+          &__list {
+            display: grid;
+            grid-template-columns: 1fr;
+            row-gap: 1rem;
+          }
+        }
       }
     }
   }
