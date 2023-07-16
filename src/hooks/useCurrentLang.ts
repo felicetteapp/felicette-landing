@@ -8,11 +8,13 @@ const getLangFromPathname = (pathname: string) => {
 };
 export const useCurrentLang = () => {
   const [currentLang, setCurrentLang] = useState(
-    getLangFromPathname(window?.location?.pathname || "")
+    getLangFromPathname(window ? window?.location?.pathname || "" : "")
   );
 
   useEffect(() => {
-    setCurrentLang(getLangFromPathname(window?.location?.pathname || ""));
+    setCurrentLang(
+      getLangFromPathname(window ? window?.location?.pathname || "" : "")
+    );
   }, []);
 
   return currentLang;
