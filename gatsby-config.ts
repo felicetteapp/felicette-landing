@@ -29,7 +29,6 @@ const config: GatsbyConfig = {
       options: {
         langKeyDefault: "en",
         useLangKeyLayout: false,
-        
       },
     },
   ],

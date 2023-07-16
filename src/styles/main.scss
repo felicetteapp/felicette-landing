@@ -131,13 +131,9 @@ body {
           max-width: 100%;
           padding-right: 1rem;
           text-align: left;
-
-          @media (hover: none) {
-            white-space: nowrap;
-            overflow: hidden;
-            overflow-x: auto;
-            background: green;
-          }
+          white-space: nowrap;
+          overflow: hidden;
+          overflow-x: auto;
         }
       }
     }
