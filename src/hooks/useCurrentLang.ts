@@ -7,14 +7,16 @@ const getLangFromPathname = (pathname: string) => {
   return "en";
 };
 export const useCurrentLang = () => {
-  const [currentLang, setCurrentLang] = useState(
-    getLangFromPathname(window ? window?.location?.pathname || "" : "")
-  );
+  const [currentLang, setCurrentLang] = useState("en");
 
   useEffect(() => {
-    setCurrentLang(
-      getLangFromPathname(window ? window?.location?.pathname || "" : "")
-    );
+    if (typeof window === "undefined") {
+      setCurrentLang("en");
+    } else {
+      setCurrentLang(
+        getLangFromPathname(window ? window?.location?.pathname || "" : "")
+      );
+    }
   }, []);
 
   return currentLang;
