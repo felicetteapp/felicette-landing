@@ -246,6 +246,7 @@ body {
   margin-top: calc(1rem + 20vh);
   margin-bottom: -1rem;
   width: 100%;
+
   &::before {
     margin-left: -1rem;
     display: block;
@@ -266,6 +267,10 @@ body {
     width: calc(100% + 2rem);
     height: 50px;
     background: linear-gradient($color-primary, $color-tertiary);
+    @media screen and (min-width: 600px) {
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
   }
 
   &__main {

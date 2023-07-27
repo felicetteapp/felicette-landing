@@ -75,7 +75,7 @@ const IndexPage: React.FC<PageProps> = () => {
           />
         </ProjectArticle>
       </Main>
-      <Footer />
+      <Footer data={{}} />
     </main>
   );
 };

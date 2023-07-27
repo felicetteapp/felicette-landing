@@ -75,7 +75,12 @@ const IndexPage: React.FC<PageProps> = () => {
           />
         </ProjectArticle>
       </Main>
-      <Footer />
+      <Footer
+        data={{
+          description:
+            "Felicette é um projeto open-source de Facundo Leites. Feito com amor e gatos desde Curitiba, Brasil",
+        }}
+      />
     </main>
   );
 };
@@ -88,7 +93,7 @@ export const Head = () => {
       <title>Felicette</title>
       <meta
         name="description"
-        content="Projetos de código aberto por Facundo Leites"
+        content="Felicette é um projeto open-source de Facundo Leites. Feito com amor e gatos desde Curitiba, Brasil"
       />
     </>
   );
