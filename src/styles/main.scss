@@ -1,4 +1,4 @@
-$font-secondary: "Alfa Slab One", sans-serif;
+$font-secondary: 'Space Mono', sans-serif;
 $font-primary: "Roboto", sans-serif;
 $color-bg: #1c1d21;
 $color-fg: #eeeff7;
@@ -52,6 +52,7 @@ body {
       border-bottom: 0.5rem $color-secondary solid;
       margin: 0;
       word-break: break-all;
+      font-weight: 700;
     }
     &__start {
       margin-right: -1rem;
@@ -187,7 +188,7 @@ body {
       color: $color-secondary;
       font-size: 4rem;
       font-family: $font-secondary;
-      font-weight: normal;
+      font-weight: 700;
     }
 
     &__lead-text,
@@ -205,7 +206,7 @@ body {
     &__title {
       font-size: 2rem;
       font-family: $font-secondary;
-      font-weight: normal;
+      font-weight: 700;
     }
 
     &__sub-item {

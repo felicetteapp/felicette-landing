@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
+import { getRandomItem } from "../helpers";
 
 export const ProjectArticle = ({
   number,
@@ -9,14 +10,38 @@ export const ProjectArticle = ({
 }: PropsWithChildren<{
   number: string;
   title: string;
-  emojis: string;
+  emojis: Array<string>;
   leadText: string;
 }>) => {
+  const emojiEl = useRef<HTMLElement>(null);
+  const nextFrameTimer = useRef<NodeJS.Timer>();
+
+  useEffect(() => {
+    const animateFrame = () => {
+      if (nextFrameTimer.current) {
+        clearTimeout(nextFrameTimer.current);
+      }
+
+      if (!emojiEl.current) {
+        return;
+      }
+      emojiEl.current.innerHTML = getRandomItem(emojis);
+
+      nextFrameTimer.current = setTimeout(() => {
+        animateFrame();
+      }, 300);
+    };
+
+    animateFrame();
+  }, [emojis]);
+
   return (
     <article className="main__article">
       <section className="main__article__number">{number}</section>
       <section className="main__article__title">{title}</section>
-      <section className="main__article__emojis">{emojis}</section>
+      <section className="main__article__emojis" ref={emojiEl}>
+        {emojis}
+      </section>
       <section className="main__article__lead-text">{leadText}</section>
       {children}
     </article>
@@ -42,7 +67,6 @@ export const ProjectArticleSubItemLink = ({
   className,
   ...props
 }: React.HTMLProps<HTMLAnchorElement>) => {
-  console.log("teste", className);
   return (
     <a
       {...props}

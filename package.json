@@ -16,9 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/alfa-slab-one": "^5.0.4",
     "@fontsource/roboto": "^5.0.4",
-    "gatsby": "^5.11.0",
+    "@fontsource/space-mono": "^5.0.17",
+    "gatsby": "^5.12.9",
     "gatsby-plugin-i18n": "^1.0.1",
     "gatsby-plugin-manifest": "^5.11.0",
     "gatsby-plugin-sass": "^6.11.0",

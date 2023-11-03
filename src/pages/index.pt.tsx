@@ -32,7 +32,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <Main>
         <ProjectArticle
           number="01"
-          emojis="💸🥕📋🍎"
+          emojis={["💸", "🥕", "📋", "🍎"]}
           title="Felicette recipes"
           leadText="Guarde suas receitas, os ingredientes necessários para fazé-las e crie listas de compra para organizar seu día a día"
         >
