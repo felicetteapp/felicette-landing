@@ -1,7 +1,10 @@
 import * as React from "react";
 import type { PageProps } from "gatsby";
 import "../styles/main.scss";
-import "@fontsource/alfa-slab-one";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/400-italic.css";
+import "@fontsource/space-mono/700.css";
+import "@fontsource/space-mono/700-italic.css";
 import "@fontsource/roboto/100.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -32,7 +35,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <Main>
         <ProjectArticle
           number="01"
-          emojis="💸🥕📋🍎"
+          emojis={["💸", "🥕", "📋", "🍎"]}
           title="Felicette recipes"
           leadText="Save your recipes, the ingredients needed to make them and create shopping lists to organize your day to day"
         >
