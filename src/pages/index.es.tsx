@@ -1,7 +1,10 @@
 import * as React from "react";
 import type { PageProps } from "gatsby";
 import "../styles/main.scss";
-import "@fontsource/alfa-slab-one";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/400-italic.css";
+import "@fontsource/space-mono/700.css";
+import "@fontsource/space-mono/700-italic.css";
 import "@fontsource/roboto/100.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
