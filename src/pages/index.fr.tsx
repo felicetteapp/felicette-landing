@@ -36,15 +36,12 @@ const IndexPage: React.FC<PageProps> = () => {
         <ProjectArticle
           number="01"
           emojis={["💸", "🥕", "📋", "🍎"]}
-          title="Felicette recipes"
-          leadText="Save your recipes, the ingredients needed to make them and create shopping lists to organize your day to day"
+          title="Recettes Felicette"
+          leadText="Enregistrez vos recettes, les ingrédients nécessaires pour les réaliser et créez des listes de courses pour organiser votre quotidien"
         >
+          <ProjectArticleSubItem label={"état actuel"} value={"alpha fermée"} />
           <ProjectArticleSubItem
-            label={"current state"}
-            value={"closed alpha"}
-          />
-          <ProjectArticleSubItem
-            label={"source code"}
+            label={"code source"}
             value={
               <ProjectArticleSubItemLinkList>
                 <ProjectArticleSubItemLink
@@ -65,7 +62,7 @@ const IndexPage: React.FC<PageProps> = () => {
             }
           />
           <ProjectArticleSubItem
-            label={"see more"}
+            label={"voir plus"}
             value={
               <ProjectArticleSubItemLink
                 href="https://recipes.felicette.app"
@@ -91,7 +88,7 @@ export const Head = () => {
       <title>Felicette</title>
       <meta
         name="description"
-        content="Open source projects by Facundo Leites"
+        content="Projets open source par Facundo Leites"
       />
     </>
   );
