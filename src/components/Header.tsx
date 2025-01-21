@@ -48,10 +48,20 @@ export const Header = ({
       const finalPart = [...totalParts].splice(pos, totalParts.length - pos);
       felicetteEl.current.innerHTML = initialPart
         .join("")
-        .replace(EMOJI_PLACEHOLDER, getRandomItem(emojis));
+        .replace(
+          EMOJI_PLACEHOLDER,
+          `<span class="header__felicette-title__emoji"">${getRandomItem(
+            emojis
+          )}</span>`
+        );
       appEl.current.innerHTML = finalPart
         .join("")
-        .replace(EMOJI_PLACEHOLDER, getRandomItem(emojis));
+        .replace(
+          EMOJI_PLACEHOLDER,
+          `<span class="header__felicette-title__emoji"">${getRandomItem(
+            emojis
+          )}</span>`
+        );
 
       nextFrameTimer.current = setTimeout(() => {
         animateFrame();
