@@ -77,6 +77,70 @@ const IndexPage: React.FC<PageProps> = () => {
             }
           />
         </ProjectArticle>
+        <ProjectArticle
+          number="02"
+          emojis={["🚀", "📦", "🔍", "🖼️"]}
+          title="Felicette img-loading"
+          leadText="A headless image loading component that uses the Intersection Observer API"
+        >
+          <ProjectArticleSubItem label={"current state"} value={"published"} />
+          <ProjectArticleSubItem
+            label={"source code"}
+            value={
+              <ProjectArticleSubItemLink
+                href="https://github.com/felicetteapp/img-loading"
+                target="_blank"
+                rel="noopener"
+              >
+                github.com/felicetteapp/img-loading
+              </ProjectArticleSubItemLink>
+            }
+          />
+          <ProjectArticleSubItem
+            label={"see more"}
+            value={
+              <ProjectArticleSubItemLink
+                href="https://github.com/felicetteapp/img-loading/pkgs/npm/img-loading"
+                target="_blank"
+                rel="noopener"
+              >
+                github.com/felicetteapp/img-loading/pkgs/npm/img-loading
+              </ProjectArticleSubItemLink>
+            }
+          />
+        </ProjectArticle>
+        <ProjectArticle
+          number="03"
+          emojis={["🚀", "📦", "🛠️", "🖼️"]}
+          title="Felicette img-loading-utils"
+          leadText="A suite of CLI and NodeJS utilities for img-loading including generating placeholders and optimizing images"
+        >
+          <ProjectArticleSubItem label={"current state"} value={"published"} />
+          <ProjectArticleSubItem
+            label={"source code"}
+            value={
+              <ProjectArticleSubItemLink
+                href="https://github.com/felicetteapp/img-loading-utils"
+                target="_blank"
+                rel="noopener"
+              >
+                github.com/felicetteapp/img-loading-utils
+              </ProjectArticleSubItemLink>
+            }
+          />
+          <ProjectArticleSubItem
+            label={"see more"}
+            value={
+              <ProjectArticleSubItemLink
+                href="https://github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils"
+                target="_blank"
+                rel="noopener"
+              >
+                github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils
+              </ProjectArticleSubItemLink>
+            }
+          />
+        </ProjectArticle>
       </Main>
       <Footer data={{}} />
     </main>

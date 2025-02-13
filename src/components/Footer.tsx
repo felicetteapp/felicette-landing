@@ -2,7 +2,7 @@ import React from "react";
 import felicettePj from "../images/felicette_site_pj.png";
 
 const defaultFooterTranslation = {
-  name: "Felicette 2023-2024",
+  name: "Felicette 2023-2025",
   description:
     "Felicette is an open-source project by Facundo Leites. Made with love and cats from Curitiba, Brazil",
 };
