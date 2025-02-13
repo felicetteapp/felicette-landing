@@ -73,9 +73,12 @@ const IndexPage: React.FC<PageProps> = () => {
               </ProjectArticleSubItemLink>
             }
           />
-        </ProjectArticle>
+        </ProjectArticle> 
       </Main>
-      <Footer data={{}} />
+      <Footer data={{
+        description:
+        "Felicette est un projet open-source de Facundo Leites. Faite avec amour et des chats de Curitiba, Brésil",
+      }} />
     </main>
   );
 };

@@ -1,4 +1,4 @@
-$font-secondary: 'Space Mono', sans-serif;
+$font-secondary: "Space Mono", sans-serif;
 $font-primary: "Roboto", sans-serif;
 $color-bg: #1c1d21;
 $color-fg: #eeeff7;
@@ -53,11 +53,10 @@ body {
       margin: 0;
       word-break: break-all;
       font-weight: 700;
-      
     }
 
-    &__emoji{
-      font-size:0.5em;
+    &__emoji {
+      font-size: 0.5em;
     }
     &__start {
       margin-right: -1rem;
@@ -70,6 +69,11 @@ body {
     }
   }
   &__main-title {
+    font-size: 1.5rem;
+    color: $color-bg;
+    font-family: $font-secondary;
+    font-weight: normal;
+    margin: 0;
     &__wrapper {
       background: $color-fg;
       color: $color-bg;
@@ -82,11 +86,6 @@ body {
       margin-top: -1rem;
       line-height: 2rem;
     }
-    font-size: 1.5rem;
-    color: $color-bg;
-    font-family: $font-secondary;
-    font-weight: normal;
-    margin: 0;
   }
 
   &__language {
@@ -159,6 +158,12 @@ body {
   color: $color-fg;
   &__article {
     position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+    margin-bottom: 1rem;
     &::before {
       position: absolute;
       left: -1rem;
@@ -172,13 +177,6 @@ body {
       background-repeat: no-repeat;
       z-index: -1;
     }
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 1rem;
-    row-gap: 1rem;
-    margin-bottom: 1rem;
-
     &__number,
     &__title {
       align-self: baseline;
