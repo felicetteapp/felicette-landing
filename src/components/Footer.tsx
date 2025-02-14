@@ -22,7 +22,7 @@ export const Footer = ({
             @felicetteapp@mastodon.social
           </a>
           <br />
-          <a href="https://bsky.app/profile/felicetteapp">
+          <a href="https://bsky.app/profile/felicette.app">
             bsky.app/felicette.app
           </a>
         </section>
