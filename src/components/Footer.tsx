@@ -18,6 +18,13 @@ export const Footer = ({
         <section className="footer__main__section footer__main__section--text">
           <strong>{t.name}</strong>
           <p>{t.description}</p>
+          <a rel="me" href="https://mastodon.social/@felicetteapp">
+            @felicetteapp@mastodon.social
+          </a>
+          <br />
+          <a href="https://bsky.app/profile/felicetteapp">
+            bsky.app/felicette.app
+          </a>
         </section>
         <section className="footer__main__section footer__main__section--img">
           <img src={felicettePj} alt="felicette" />

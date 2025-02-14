@@ -251,6 +251,12 @@ body {
   margin-bottom: -1rem;
   width: 100%;
 
+  a {
+    color: inherit;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+
   &::before {
     margin-left: -1rem;
     display: block;
