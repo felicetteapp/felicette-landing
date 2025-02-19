@@ -14,7 +14,7 @@ export const ProjectArticle = ({
   leadText: string;
 }>) => {
   const emojiEl = useRef<HTMLElement>(null);
-  const nextFrameTimer = useRef<NodeJS.Timer>();
+  const nextFrameTimer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     const animateFrame = () => {

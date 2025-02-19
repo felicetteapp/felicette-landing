@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $font-secondary: "Space Mono", sans-serif;
 $font-primary: "Roboto", sans-serif;
 $color-bg: #1c1d21;
@@ -20,12 +22,86 @@ body {
   background-position: top center;
   background-attachment: fixed;
   background-size: 600px auto;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
+html {
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/stars_bg.webp");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    z-index: -1;
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+html {
+  &:not(.--rocket-moving) {
+    body {
+      &::before {
+        animation: rotate 20s linear infinite both;
+      }
+    }
+  }
+}
+
+body {
+  background: radial-gradient(
+    circle at var(--rt-mouse-x) var(--rt-mouse-y),
+    rgba($color-bg, 0) 0%,
+    rgba($color-bg, 0.3) 5%,
+    rgba(color.mix($color-primary, $color-bg, 20%), 0.4) 7%,
+    rgba(color.mix($color-secondary, $color-bg, 20%), 0.3) 9%,
+    rgba($color-bg, 0.9) 14%,
+    $color-bg 20%
+  );
+
+  &::before {
+    content: "🚀";
+    font-size: 2rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    display: block;
+    color: $color-fg;
+    left: calc(var(--mouse-x));
+    top: calc(var(--mouse-y));
+    rotate: calc(var(--mouse-angle) + 45deg);
+    translate: -50% -50%;
+    position: absolute;
+    pointer-events: none;
+    transition: all 0.7s 0.3s cubic-bezier(0.745, 0.035, 0, 0.995),
+      rotate 0.3s 0s linear;
+  }
 }
 
 .wrapper {
   max-width: min(100%, 900px);
   padding: 1rem;
   margin: 0 auto;
+  background: linear-gradient(
+    rgba($color-bg, 0) 150px,
+    rgba($color-bg, 0.8) 350px
+  );
+  position: relative;
 }
 
 .header {
