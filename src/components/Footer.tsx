@@ -1,5 +1,6 @@
 import React from "react";
 import felicettePj from "../images/felicette_site_pj.png";
+import { FormattedMessage } from "gatsby-plugin-intl";
 
 const defaultFooterTranslation = {
   name: "Felicette 2023-2025",
@@ -17,7 +18,22 @@ export const Footer = ({
       <main className="footer__main">
         <section className="footer__main__section footer__main__section--text">
           <strong>{t.name}</strong>
-          <p>{t.description}</p>
+          <p>
+            <FormattedMessage
+              id="footer.about"
+              values={{
+                link: (
+                  <a
+                    href="https://www.facundoleites.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Facundo Leites
+                  </a>
+                ),
+              }}
+            />
+          </p>
           <a rel="me" href="https://mastodon.social/@felicetteapp">
             @felicetteapp@mastodon.social
           </a>

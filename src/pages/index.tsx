@@ -27,8 +27,10 @@ import {
   ProjectArticleSubItemLinkList,
 } from "../components/ProjectArticle";
 import { Footer } from "../components/Footer";
+import { useIntl } from "gatsby-plugin-intl";
 
 const IndexPage: React.FC<PageProps> = () => {
+  const { formatMessage } = useIntl();
   return (
     <main className="wrapper">
       <Header />
@@ -36,15 +38,15 @@ const IndexPage: React.FC<PageProps> = () => {
         <ProjectArticle
           number="01"
           emojis={["💸", "🥕", "📋", "🍎"]}
-          title="Felicette recipes"
-          leadText="Save your recipes, the ingredients needed to make them and create shopping lists to organize your day to day"
+          title={formatMessage({ id: "felicette_recipes.title" })}
+          leadText={formatMessage({ id: "felicette_recipes.lead_text" })}
         >
           <ProjectArticleSubItem
-            label={"current state"}
-            value={"closed alpha"}
+            label={formatMessage({ id: "common.current_state" })}
+            value={formatMessage({ id: "common.closed_alpha" })}
           />
           <ProjectArticleSubItem
-            label={"source code"}
+            label={formatMessage({ id: "common.source_code" })}
             value={
               <ProjectArticleSubItemLinkList>
                 <ProjectArticleSubItemLink
@@ -65,7 +67,7 @@ const IndexPage: React.FC<PageProps> = () => {
             }
           />
           <ProjectArticleSubItem
-            label={"see more"}
+            label={formatMessage({ id: "common.see_more" })}
             value={
               <ProjectArticleSubItemLink
                 href="https://recipes.felicette.app"
@@ -80,12 +82,15 @@ const IndexPage: React.FC<PageProps> = () => {
         <ProjectArticle
           number="02"
           emojis={["🚀", "📦", "🔍", "🖼️"]}
-          title="Felicette img-loading"
-          leadText="A headless image loading component that uses the Intersection Observer API"
+          title={formatMessage({ id: "felicette_img_loading.title" })}
+          leadText={formatMessage({ id: "felicette_img_loading.lead_text" })}
         >
-          <ProjectArticleSubItem label={"current state"} value={"published"} />
           <ProjectArticleSubItem
-            label={"source code"}
+            label={formatMessage({ id: "common.current_state" })}
+            value={formatMessage({ id: "common.published" })}
+          />
+          <ProjectArticleSubItem
+            label={formatMessage({ id: "common.source_code" })}
             value={
               <ProjectArticleSubItemLink
                 href="https://github.com/felicetteapp/img-loading"
@@ -97,7 +102,7 @@ const IndexPage: React.FC<PageProps> = () => {
             }
           />
           <ProjectArticleSubItem
-            label={"see more"}
+            label={formatMessage({ id: "common.see_more" })}
             value={
               <ProjectArticleSubItemLink
                 href="https://github.com/felicetteapp/img-loading/pkgs/npm/img-loading"
@@ -112,12 +117,17 @@ const IndexPage: React.FC<PageProps> = () => {
         <ProjectArticle
           number="03"
           emojis={["🚀", "📦", "🛠️", "🖼️"]}
-          title="Felicette img-loading-utils"
-          leadText="A suite of CLI and NodeJS utilities for img-loading including generating placeholders and optimizing images"
+          title={formatMessage({ id: "felicette_img_loading_utils.title" })}
+          leadText={formatMessage({
+            id: "felicette_img_loading_utils.lead_text",
+          })}
         >
-          <ProjectArticleSubItem label={"current state"} value={"published"} />
           <ProjectArticleSubItem
-            label={"source code"}
+            label={formatMessage({ id: "common.current_state" })}
+            value={formatMessage({ id: "common.published" })}
+          />
+          <ProjectArticleSubItem
+            label={formatMessage({ id: "common.source_code" })}
             value={
               <ProjectArticleSubItemLink
                 href="https://github.com/felicetteapp/img-loading-utils"
@@ -129,7 +139,7 @@ const IndexPage: React.FC<PageProps> = () => {
             }
           />
           <ProjectArticleSubItem
-            label={"see more"}
+            label={formatMessage({ id: "common.see_more" })}
             value={
               <ProjectArticleSubItemLink
                 href="https://github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils"
@@ -137,6 +147,43 @@ const IndexPage: React.FC<PageProps> = () => {
                 rel="noopener"
               >
                 github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils
+              </ProjectArticleSubItemLink>
+            }
+          />
+        </ProjectArticle>
+        <ProjectArticle
+          number="04"
+          emojis={["🚀", "📦", "🔍", "📱"]}
+          title={formatMessage({ id: "tsuru_no_mundo.title" })}
+          leadText={formatMessage({
+            id: "tsuru_no_mundo.lead_text",
+          })}
+        >
+          <ProjectArticleSubItem
+            label={formatMessage({ id: "common.current_state" })}
+            value={formatMessage({ id: "common.published" })}
+          />
+          <ProjectArticleSubItem
+            label={formatMessage({ id: "common.source_code" })}
+            value={
+              <ProjectArticleSubItemLink
+                href="https://github.com/felicetteapp/tsuru-no-mundo-landing"
+                target="_blank"
+                rel="noopener"
+              >
+                github.com/felicetteapp/tsuru-no-mundo-landing
+              </ProjectArticleSubItemLink>
+            }
+          />
+          <ProjectArticleSubItem
+            label={formatMessage({ id: "common.see_more" })}
+            value={
+              <ProjectArticleSubItemLink
+                href="https://tsurunomundo.com.br"
+                target="_blank"
+                rel="noopener"
+              >
+                tsurunomundo.com.br
               </ProjectArticleSubItemLink>
             }
           />

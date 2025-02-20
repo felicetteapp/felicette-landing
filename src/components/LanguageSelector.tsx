@@ -10,7 +10,7 @@ const LanguageSelectorItem = ({ lang }: { lang: string }) => {
       : undefined,
   ];
   return (
-    <Link className={classes.join(" ")} to={lang === "en" ? "/" : `/${lang}`}>
+    <Link className={classes.join(" ")} to={`/${lang}`}>
       {lang}
     </Link>
   );

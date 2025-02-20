@@ -1,0 +1,29 @@
+{
+  "common": {
+    "closed_alpha": "Alpha fechado",
+    "current_state": "Estado atual",
+    "published": "Publicado",
+    "see_more": "Ver mais",
+    "source_code": "Código fonte"
+  },
+  "felicette": "Felicette",
+  "felicette_img_loading": {
+    "lead_text": "Um componente de carregamento de imagem headless que usa a API Intersection Observer",
+    "title": "Felicette img-loading"
+  },
+  "felicette_img_loading_utils": {
+    "lead_text": "Um conjunto de utilitários CLI e NodeJS para carregamento de imagens, incluindo geração de placeholders e otimização de imagens",
+    "title": "Felicette img-loading-utils"
+  },
+  "felicette_recipes": {
+    "lead_text": "Salve suas receitas, os ingredientes necessários para fazê-las e crie listas de compras para organizar seu dia a dia",
+    "title": "Receitas da Felicette"
+  },
+  "footer": {
+    "about": "Felicette é um projeto open-source de {link}. Feito com amor e gatos desde Curitiba, Brasil"
+  },
+  "tsuru_no_mundo": {
+    "lead_text": "Página de destino para o projeto Tsuru No Mundo incluindo um belo slider de fotografias",
+    "title": "Tsuru No Mundo"
+  }
+}

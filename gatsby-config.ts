@@ -25,10 +25,12 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: "gatsby-plugin-i18n",
+      resolve: `gatsby-plugin-intl`,
       options: {
-        langKeyDefault: "en",
-        useLangKeyLayout: false,
+        path: `${__dirname}/src/intl`,
+        languages: [`en`, `es`, `pt`,'fr'],
+        defaultLanguage: `en`,
+        redirect: true,
       },
     },
   ],
