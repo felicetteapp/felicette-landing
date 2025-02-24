@@ -25,5 +25,23 @@
   "tsuru_no_mundo": {
     "lead_text": "Página de destino para o projeto Tsuru No Mundo incluindo um belo slider de fotografias",
     "title": "Tsuru No Mundo"
+  },
+  "tsuru_no_mundo_daily": {
+    "lead_text": "O projeto diário do projeto Tsuru No Mundo. Uma página estática feita com eleventy com uma enorme grade de imagens com carregamento preguiçoso (usando felicette-img-loading)",
+    "title": "Tsuru No Mundo Diário"
+  },
+  "deep_space": {
+    "title": "Espaço Profundo",
+    "open_source": {
+      "title": "Este site é open source",
+      "description": "Você pode ver o código fonte e fazer o que quiser com ele."
+    },
+    "share": {
+      "title": "Compartilhar",
+      "description": "Se você gostou deste projeto, compartilhe com seus amigos. Você pode baixar este GIF e usar em seu site vinculando para https://felicette.dev ou https://felicette.app"
+    },
+    "friends": {
+      "title": "Amigos"
+    }
   }
 }

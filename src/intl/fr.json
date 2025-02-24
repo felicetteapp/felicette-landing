@@ -25,5 +25,23 @@
   "tsuru_no_mundo": {
     "lead_text": "Page de destination pour le projet Tsuru No Mundo comprenant un magnifique slider de photographies",
     "title": "Tsuru No Mundo"
+  },
+  "tsuru_no_mundo_daily": {
+    "lead_text": "Le projet quotidien du projet Tsuru No Mundo. Une page statique réalisée avec eleventy avec une énorme grille d'images avec chargement paresseux (en utilisant felicette-img-loading)",
+    "title": "Tsuru No Mundo Daily"
+  },
+  "deep_space": {
+    "title": "Espace Profond",
+    "open_source": {
+      "title": "Ce site est open source",
+      "description": "Vous pouvez voir le code source et en faire ce que vous voulez."
+    },
+    "share": {
+      "title": "Partager",
+      "description": "Si vous avez aimé ce projet, partagez-le avec vos amis. Vous pouvez télécharger ce GIF et l'utiliser sur votre site en le liant à https://felicette.dev ou https://felicette.app"
+    },
+    "friends": {
+      "title": "Amis"
+    }
   }
 }

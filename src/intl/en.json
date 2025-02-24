@@ -25,5 +25,23 @@
   "tsuru_no_mundo": {
     "lead_text": "Landing page for the Tsuru No Mundo project including a beautiful slider de photographies",
     "title": "Tsuru No Mundo"
+  },
+  "tsuru_no_mundo_daily": {
+    "lead_text": "The daily project from the Tsuru No Mundo project. A static page made with eleventy with a huge grid of images with lazy loading (using felicette-img-loading)",
+    "title": "Tsuru No Mundo Daily"
+  },
+  "deep_space": {
+    "title": "Deep Space",
+    "open_source": {
+      "title": "This site is open source",
+      "description": "You can see the source code and do whatever you want with it."
+    },
+    "share": {
+      "title": "Share",
+      "description": "If you liked this project, share it with your friends. You can download this GIF and use in your site linking to https://felicette.dev or https://felicette.app"
+    },
+    "friends": {
+      "title": "Friends"
+    }
   }
 }
