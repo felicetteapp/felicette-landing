@@ -2,8 +2,18 @@ import React, { useEffect, useRef } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { getRandomItem } from "../helpers";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
+import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
+import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass";
+import felicetteLogo from "../images/felicette_logo.png";
+import WebGL from "three/examples/jsm/capabilities/WebGL.js";
+
 import * as THREE from "three";
 const tdmodel = "/Fl4.glb";
+
 const loader = new GLTFLoader();
 
 const EMOJI_PLACEHOLDER = "🌍";
@@ -180,33 +190,53 @@ export const Header = ({
   }, []);
 
   const threeJsContainer = useRef<HTMLDivElement>(null);
+  const logoImg = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    const scene = new THREE.Scene();
-    const containerSize = threeJsContainer.current?.getBoundingClientRect();
-    const aspectRatio =
-      (containerSize?.width ?? 1) / (containerSize?.height ?? 1);
+    if (!threeJsContainer.current) {
+      return;
+    }
 
-    const defaultCamera = new THREE.PerspectiveCamera(
-      50,
-      aspectRatio,
-      0.1,
-      1000
-    );
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(containerSize?.width ?? 10, containerSize?.height ?? 10);
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    threeJsContainer.current?.appendChild(renderer.domElement);
-
-    defaultCamera.position.z = 5;
-
-    scene.add(defaultCamera);
+    if (!WebGL.isWebGL2Available()) {
+      logoImg.current?.style.setProperty("opacity", "1");
+      threeJsContainer.current.style.setProperty("display", "none");
+      return;
+    }
 
     loader.load(
       tdmodel,
       function (gltf) {
+        logoImg.current?.style.setProperty("display", "none");
+        threeJsContainer.current?.style.setProperty("display", "block");
+
+        const scene = new THREE.Scene();
+        const containerSize = threeJsContainer.current?.getBoundingClientRect();
+        const aspectRatio =
+          (containerSize?.width ?? 1) / (containerSize?.height ?? 1);
+
+        const defaultCamera = new THREE.PerspectiveCamera(
+          50,
+          aspectRatio,
+          0.1,
+          1000
+        );
+
+        const renderer = new THREE.WebGLRenderer({
+          alpha: true,
+          antialias: false,
+        });
+        renderer.setSize(
+          containerSize?.width ?? 10,
+          containerSize?.height ?? 10
+        );
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        threeJsContainer.current?.appendChild(renderer.domElement);
+
+        defaultCamera.position.z = 5;
+
+        scene.add(defaultCamera);
+
         const { scene: obj } = gltf;
 
         obj.updateMatrix();
@@ -226,6 +256,7 @@ export const Header = ({
         defaultCamera.updateProjectionMatrix();
 
         defaultCamera.position.copy(center);
+        defaultCamera.position.y = -0.4;
         defaultCamera.position.z = 2.3;
         defaultCamera.lookAt(center);
 
@@ -233,18 +264,56 @@ export const Header = ({
         lightsTarget.position.copy(center);
         scene.add(lightsTarget);
 
-        const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(-1, 0, 1);
+        const light = new THREE.DirectionalLight(0xffffff, 5);
+        light.position.set(-1, 2, 3);
         scene.add(light);
 
-        const secondLight = new THREE.DirectionalLight(0x92cdcf, 10);
+        const secondLight = new THREE.DirectionalLight(0x92cdcf, 20);
 
-        secondLight.position.set(2, 0, 0);
+        obj.children.forEach((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+
+        secondLight.position.set(2, 0, -3);
         scene.add(secondLight);
 
         light.target = lightsTarget;
         secondLight.target = lightsTarget;
-        renderer.render(scene, defaultCamera);
+
+        const textureLoader = new THREE.TextureLoader();
+
+        let composer = new EffectComposer(renderer);
+
+        const renderPass = new RenderPass(scene, defaultCamera);
+        composer.addPass(renderPass);
+
+        let outlinePass = new OutlinePass(
+          new THREE.Vector2(window.innerWidth * 20, window.innerHeight * 20),
+          scene,
+          defaultCamera
+        );
+
+        outlinePass.visibleEdgeColor.set("#1c1d21");
+        outlinePass.selectedObjects = obj.children;
+
+        outlinePass.edgeStrength = 10;
+        outlinePass.edgeThickness = 1.0;
+
+        const outputPass = new OutputPass();
+        composer.addPass(outputPass);
+
+        const effectFXAA = new ShaderPass(FXAAShader);
+        effectFXAA.uniforms["resolution"].value.set(
+          1 / (containerSize?.width || 1),
+          1 / (containerSize?.height || 1)
+        );
+        composer.addPass(effectFXAA);
+        composer.addPass(outlinePass);
+
+        composer.render();
 
         let rotationDirection = 1;
         let lastTime = performance.now();
@@ -265,7 +334,7 @@ export const Header = ({
           const deltaTime = currentTime - lastTime;
           lastTime = currentTime;
           obj.rotation.y += 0.00125 * rotationDirection * deltaTime;
-          renderer.render(scene, defaultCamera);
+          composer.render();
 
           calculateRotationDirection();
 
@@ -283,7 +352,22 @@ export const Header = ({
   return (
     <>
       <header className="header">
-        <div ref={threeJsContainer} className="header__three-js-container" />
+        <img
+          className="header__logo"
+          src={felicetteLogo}
+          alt="Felicette logo"
+          ref={logoImg}
+          style={{
+            opacity: 0,
+          }}
+        />
+        <div
+          ref={threeJsContainer}
+          style={{
+            display: "none",
+          }}
+          className="header__three-js-container"
+        />
         <div className="header__main-title__wrapper">
           <h2 className="header__main-title">{t.projects}</h2>
         </div>

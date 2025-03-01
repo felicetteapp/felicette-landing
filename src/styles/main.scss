@@ -162,6 +162,8 @@ body {
     font-family: $font-secondary;
     font-weight: normal;
     margin: 0;
+    word-break: break-all;
+
     &__wrapper {
       background: $color-fg;
       color: $color-bg;
@@ -173,6 +175,8 @@ body {
       font-size: 2rem;
       margin-top: -1rem;
       line-height: 2rem;
+      overflow: hidden;
+      break-after: always;
     }
   }
 
