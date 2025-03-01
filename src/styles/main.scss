@@ -118,9 +118,17 @@ body {
   &__spacer {
     height: 2rem;
   }
-  &__logo {
+  &__logo,
+  &__three-js-container {
+    aspect-ratio: 1/1;
     max-width: 100%;
     transform: translate(calc(50% + 1rem));
+    overflow: hidden;
+
+    canvas {
+      aspect-ratio: 1/1;
+      width: 100%;
+    }
   }
   &__felicette-title {
     &__start,
@@ -155,6 +163,8 @@ body {
     font-family: $font-secondary;
     font-weight: normal;
     margin: 0;
+    word-break: break-all;
+
     &__wrapper {
       background: $color-fg;
       color: $color-bg;
@@ -166,6 +176,8 @@ body {
       font-size: 2rem;
       margin-top: -1rem;
       line-height: 2rem;
+      overflow: hidden;
+      break-after: always;
     }
   }
 
