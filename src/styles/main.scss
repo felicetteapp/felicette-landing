@@ -123,6 +123,7 @@ body {
     aspect-ratio: 1/1;
     max-width: 100%;
     transform: translate(calc(50% + 1rem));
+    overflow: hidden;
 
     canvas {
       aspect-ratio: 1/1;

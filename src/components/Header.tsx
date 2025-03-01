@@ -342,6 +342,32 @@ export const Header = ({
         };
 
         requestAnimationFrame(animateHorizontalRotation);
+
+        //handle window resize
+
+        window.addEventListener("resize", () => {
+          const containerSize =
+            threeJsContainer.current?.getBoundingClientRect();
+
+          if (!containerSize) {
+            return;
+          }
+
+          renderer.setSize(
+            containerSize?.width ?? 10,
+            containerSize?.height ?? 10
+          );
+          defaultCamera.aspect = containerSize?.width / containerSize?.height;
+          defaultCamera.updateProjectionMatrix();
+          composer.setSize(
+            containerSize?.width ?? 10,
+            containerSize?.height ?? 10
+          );
+          effectFXAA.uniforms["resolution"].value.set(
+            1 / (containerSize?.width || 1),
+            1 / (containerSize?.height || 1)
+          );
+        });
       },
       undefined,
       function (error) {
