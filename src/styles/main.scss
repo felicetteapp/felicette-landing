@@ -139,13 +139,13 @@ body {
   }
   &__logo,
   &__three-js-container {
-    aspect-ratio: 1/1;
+    aspect-ratio: 1/1.5;
     max-width: 100%;
     transform: translate(calc(50% + 1rem));
     overflow: hidden;
 
     canvas {
-      aspect-ratio: 1/1;
+      aspect-ratio: 1/1.5;
       width: 100%;
     }
   }

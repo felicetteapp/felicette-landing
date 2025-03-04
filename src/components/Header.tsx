@@ -12,7 +12,7 @@ import felicetteLogo from "../images/felicette_logo.png";
 import WebGL from "three/examples/jsm/capabilities/WebGL.js";
 
 import * as THREE from "three";
-const tdmodel = "/Fl4.glb";
+const tdmodel = "/felicette_helmet2.glb";
 
 const loader = new GLTFLoader();
 
@@ -224,12 +224,14 @@ export const Header = ({
 
         const renderer = new THREE.WebGLRenderer({
           alpha: true,
-          antialias: false,
+          antialias: true,
         });
         renderer.setSize(
           containerSize?.width ?? 10,
           containerSize?.height ?? 10
         );
+
+        console.log(window.devicePixelRatio);
         renderer.setPixelRatio(window.devicePixelRatio);
 
         threeJsContainer.current?.appendChild(renderer.domElement);
@@ -248,7 +250,7 @@ export const Header = ({
         const size = box.getSize(new THREE.Vector3()).length();
         const center = box.getCenter(new THREE.Vector3());
 
-        obj.position.x -= center.x;
+        //obj.position.x -= center.x;
         obj.position.y -= center.y;
         obj.position.z -= center.z;
 
@@ -257,8 +259,8 @@ export const Header = ({
         defaultCamera.updateProjectionMatrix();
 
         defaultCamera.position.copy(center);
-        defaultCamera.position.y = -0.4;
-        defaultCamera.position.z = 2.3;
+        defaultCamera.position.y = 0.5;
+        defaultCamera.position.z = 4.7;
         defaultCamera.lookAt(center);
 
         const lightsTarget = new THREE.Object3D();
@@ -266,10 +268,10 @@ export const Header = ({
         scene.add(lightsTarget);
 
         const light = new THREE.DirectionalLight(0xffffff, 5);
-        light.position.set(-1, 2, 3);
+        light.position.set(-1, 0, 0.5);
         scene.add(light);
 
-        const secondLight = new THREE.DirectionalLight(0x92cdcf, 20);
+        const secondLight = new THREE.DirectionalLight(0x92cdcf, 10);
 
         obj.children.forEach((child) => {
           if (child instanceof THREE.Mesh) {
@@ -278,13 +280,11 @@ export const Header = ({
           }
         });
 
-        secondLight.position.set(2, 0, -3);
+        secondLight.position.set(2, 0, -1);
         scene.add(secondLight);
 
         light.target = lightsTarget;
         secondLight.target = lightsTarget;
-
-        const textureLoader = new THREE.TextureLoader();
 
         let composer = new EffectComposer(renderer);
 
