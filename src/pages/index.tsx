@@ -48,138 +48,6 @@ const IndexPage: React.FC<PageProps> = () => {
         <Main>
           <ProjectArticle
             number="01"
-            emojis={["💸", "🥕", "📋", "🍎"]}
-            title={formatMessage({ id: "felicette_recipes.title" })}
-            techStack={[
-              "TypeScript",
-              "React",
-              "Node.js",
-              "Firebase",
-              "i18n",
-              "@mui/material",
-            ]}
-            leadText={formatMessage({ id: "felicette_recipes.lead_text" })}
-          >
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.current_state" })}
-              value={formatMessage({ id: "common.closed_alpha" })}
-            />
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.source_code" })}
-              value={
-                <ProjectArticleSubItemLinkList>
-                  <ProjectArticleSubItemLink
-                    href="https://github.com/felicetteapp/recipes-backend"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    github.com/felicetteapp/recipes-backend
-                  </ProjectArticleSubItemLink>
-                  <ProjectArticleSubItemLink
-                    href="https://github.com/felicetteapp/recipes-frontend"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    github.com/felicetteapp/recipes-frontend
-                  </ProjectArticleSubItemLink>
-                </ProjectArticleSubItemLinkList>
-              }
-            />
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.see_more" })}
-              value={
-                <ProjectArticleSubItemLink
-                  href="https://recipes.felicette.app"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  recipes.felicette.app
-                </ProjectArticleSubItemLink>
-              }
-            />
-          </ProjectArticle>
-          <ProjectArticle
-            number="02"
-            emojis={["🚀", "📦", "🔍", "🖼️"]}
-            title={formatMessage({ id: "felicette_img_loading.title" })}
-            techStack={["TypeScript", "Node.js", "Webpack", "Github Packages"]}
-            leadText={formatMessage({ id: "felicette_img_loading.lead_text" })}
-          >
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.current_state" })}
-              value={formatMessage({ id: "common.published" })}
-            />
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.source_code" })}
-              value={
-                <ProjectArticleSubItemLink
-                  href="https://github.com/felicetteapp/img-loading"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  github.com/felicetteapp/img-loading
-                </ProjectArticleSubItemLink>
-              }
-            />
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.see_more" })}
-              value={
-                <ProjectArticleSubItemLink
-                  href="https://github.com/felicetteapp/img-loading/pkgs/npm/img-loading"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  github.com/felicetteapp/img-loading/pkgs/npm/img-loading
-                </ProjectArticleSubItemLink>
-              }
-            />
-          </ProjectArticle>
-          <ProjectArticle
-            number="03"
-            emojis={["🚀", "📦", "🛠️", "🖼️"]}
-            title={formatMessage({ id: "felicette_img_loading_utils.title" })}
-            techStack={[
-              "TypeScript",
-              "Node.js",
-              "Github Packages",
-              "sharp",
-              "colorthief",
-            ]}
-            leadText={formatMessage({
-              id: "felicette_img_loading_utils.lead_text",
-            })}
-          >
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.current_state" })}
-              value={formatMessage({ id: "common.published" })}
-            />
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.source_code" })}
-              value={
-                <ProjectArticleSubItemLink
-                  href="https://github.com/felicetteapp/img-loading-utils"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  github.com/felicetteapp/img-loading-utils
-                </ProjectArticleSubItemLink>
-              }
-            />
-            <ProjectArticleSubItem
-              label={formatMessage({ id: "common.see_more" })}
-              value={
-                <ProjectArticleSubItemLink
-                  href="https://github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils
-                </ProjectArticleSubItemLink>
-              }
-            />
-          </ProjectArticle>
-          <ProjectArticle
-            number="04"
             emojis={["🦢", "📷", "🖼️"]}
             title={formatMessage({ id: "tsuru_no_mundo.title" })}
             techStack={["JavaScript", "PixiJs", "HTML5", "CSS3"]}
@@ -224,7 +92,7 @@ const IndexPage: React.FC<PageProps> = () => {
             />
           </ProjectArticle>
           <ProjectArticle
-            number="05"
+            number="02"
             emojis={["🦢", "📷", "🖼️", "📅"]}
             title={formatMessage({ id: "tsuru_no_mundo_daily.title" })}
             techStack={[
@@ -274,6 +142,139 @@ const IndexPage: React.FC<PageProps> = () => {
                   rel="noopener"
                 >
                   daily.tsurunomundo.com.br
+                </ProjectArticleSubItemLink>
+              }
+            />
+          </ProjectArticle>
+
+          <ProjectArticle
+            number="03"
+            emojis={["🚀", "📦", "🔍", "🖼️"]}
+            title={formatMessage({ id: "felicette_img_loading.title" })}
+            techStack={["TypeScript", "Node.js", "Webpack", "Github Packages"]}
+            leadText={formatMessage({ id: "felicette_img_loading.lead_text" })}
+          >
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.current_state" })}
+              value={formatMessage({ id: "common.published" })}
+            />
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.source_code" })}
+              value={
+                <ProjectArticleSubItemLink
+                  href="https://github.com/felicetteapp/img-loading"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  github.com/felicetteapp/img-loading
+                </ProjectArticleSubItemLink>
+              }
+            />
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.see_more" })}
+              value={
+                <ProjectArticleSubItemLink
+                  href="https://github.com/felicetteapp/img-loading/pkgs/npm/img-loading"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  github.com/felicetteapp/img-loading/pkgs/npm/img-loading
+                </ProjectArticleSubItemLink>
+              }
+            />
+          </ProjectArticle>
+          <ProjectArticle
+            number="04"
+            emojis={["🚀", "📦", "🛠️", "🖼️"]}
+            title={formatMessage({ id: "felicette_img_loading_utils.title" })}
+            techStack={[
+              "TypeScript",
+              "Node.js",
+              "Github Packages",
+              "sharp",
+              "colorthief",
+            ]}
+            leadText={formatMessage({
+              id: "felicette_img_loading_utils.lead_text",
+            })}
+          >
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.current_state" })}
+              value={formatMessage({ id: "common.published" })}
+            />
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.source_code" })}
+              value={
+                <ProjectArticleSubItemLink
+                  href="https://github.com/felicetteapp/img-loading-utils"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  github.com/felicetteapp/img-loading-utils
+                </ProjectArticleSubItemLink>
+              }
+            />
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.see_more" })}
+              value={
+                <ProjectArticleSubItemLink
+                  href="https://github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  github.com/felicetteapp/img-loading-utils/pkgs/npm/img-loading-utils
+                </ProjectArticleSubItemLink>
+              }
+            />
+          </ProjectArticle>
+          <ProjectArticle
+            number="05"
+            emojis={["💸", "🥕", "📋", "🍎"]}
+            title={formatMessage({ id: "felicette_recipes.title" })}
+            techStack={[
+              "TypeScript",
+              "React",
+              "Node.js",
+              "Firebase",
+              "i18n",
+              "@mui/material",
+            ]}
+            leadText={formatMessage({ id: "felicette_recipes.lead_text" })}
+          >
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.current_state" })}
+              value={formatMessage({ id: "common.closed_alpha" })}
+            />
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.source_code" })}
+              value={
+                <ProjectArticleSubItemLinkList>
+                  <ProjectArticleSubItemLink
+                    href="https://github.com/felicetteapp/recipes-backend"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    github.com/felicetteapp/recipes-backend
+                  </ProjectArticleSubItemLink>
+                  <ProjectArticleSubItemLink
+                    href="https://github.com/felicetteapp/recipes-frontend"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    github.com/felicetteapp/recipes-frontend
+                  </ProjectArticleSubItemLink>
+                </ProjectArticleSubItemLinkList>
+              }
+            />
+            <ProjectArticleSubItem
+              label={formatMessage({ id: "common.see_more" })}
+              value={
+                <ProjectArticleSubItemLink
+                  href="https://recipes.felicette.app"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  recipes.felicette.app
                 </ProjectArticleSubItemLink>
               }
             />
