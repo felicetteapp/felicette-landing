@@ -29,6 +29,13 @@ import {
 import { Footer } from "../components/Footer";
 import { useIntl } from "gatsby-plugin-intl";
 import { DeepSpace } from "../components/DeepSpace";
+import {
+  ProjectVideoPreviewItem,
+  ProjectVideoPreviewSection,
+} from "../components/ProjectVideoPreviewSection";
+
+import tsuruNoMundoVideo from "../videos/mobile.webm";
+import tsuruNoMundoWidescreenVideo from "../videos/widescreen.webm";
 
 const IndexPage: React.FC<PageProps> = () => {
   const { formatMessage } = useIntl();
@@ -161,6 +168,13 @@ const IndexPage: React.FC<PageProps> = () => {
               id: "tsuru_no_mundo.lead_text",
             })}
           >
+            <ProjectVideoPreviewSection>
+              <ProjectVideoPreviewItem
+                src={tsuruNoMundoWidescreenVideo}
+                span={3}
+              />
+              <ProjectVideoPreviewItem src={tsuruNoMundoVideo} />
+            </ProjectVideoPreviewSection>
             <ProjectArticleSubItem
               label={formatMessage({ id: "common.current_state" })}
               value={formatMessage({ id: "common.published" })}
