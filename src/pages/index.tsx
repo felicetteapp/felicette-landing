@@ -36,6 +36,8 @@ import {
 
 import tsuruNoMundoVideo from "../videos/mobile.webm";
 import tsuruNoMundoWidescreenVideo from "../videos/widescreen.webm";
+import tsuruNoMundoDailyVideo from "../videos/daily_mobile.webm";
+import tsuruNoMundoDailyWidescreenVideo from "../videos/daily_widescreen.webm";
 
 const IndexPage: React.FC<PageProps> = () => {
   const { formatMessage } = useIntl();
@@ -48,6 +50,14 @@ const IndexPage: React.FC<PageProps> = () => {
             number="01"
             emojis={["💸", "🥕", "📋", "🍎"]}
             title={formatMessage({ id: "felicette_recipes.title" })}
+            techStack={[
+              "TypeScript",
+              "React",
+              "Node.js",
+              "Firebase",
+              "i18n",
+              "@mui/material",
+            ]}
             leadText={formatMessage({ id: "felicette_recipes.lead_text" })}
           >
             <ProjectArticleSubItem
@@ -92,6 +102,7 @@ const IndexPage: React.FC<PageProps> = () => {
             number="02"
             emojis={["🚀", "📦", "🔍", "🖼️"]}
             title={formatMessage({ id: "felicette_img_loading.title" })}
+            techStack={["TypeScript", "Node.js", "Webpack", "Github Packages"]}
             leadText={formatMessage({ id: "felicette_img_loading.lead_text" })}
           >
             <ProjectArticleSubItem
@@ -127,6 +138,13 @@ const IndexPage: React.FC<PageProps> = () => {
             number="03"
             emojis={["🚀", "📦", "🛠️", "🖼️"]}
             title={formatMessage({ id: "felicette_img_loading_utils.title" })}
+            techStack={[
+              "TypeScript",
+              "Node.js",
+              "Github Packages",
+              "sharp",
+              "colorthief",
+            ]}
             leadText={formatMessage({
               id: "felicette_img_loading_utils.lead_text",
             })}
@@ -164,6 +182,7 @@ const IndexPage: React.FC<PageProps> = () => {
             number="04"
             emojis={["🦢", "📷", "🖼️"]}
             title={formatMessage({ id: "tsuru_no_mundo.title" })}
+            techStack={["JavaScript", "PixiJs", "HTML5", "CSS3"]}
             leadText={formatMessage({
               id: "tsuru_no_mundo.lead_text",
             })}
@@ -208,10 +227,28 @@ const IndexPage: React.FC<PageProps> = () => {
             number="05"
             emojis={["🦢", "📷", "🖼️", "📅"]}
             title={formatMessage({ id: "tsuru_no_mundo_daily.title" })}
+            techStack={[
+              "JavaScript",
+              "@11ty/eleventy",
+              "chroma-js",
+              "Markdown",
+              "sass",
+              "sharp",
+              "skyra/gifenc",
+              "liquid",
+              "nunjucks",
+            ]}
             leadText={formatMessage({
               id: "tsuru_no_mundo_daily.lead_text",
             })}
           >
+            <ProjectVideoPreviewSection>
+              <ProjectVideoPreviewItem
+                src={tsuruNoMundoDailyWidescreenVideo}
+                span={3}
+              />
+              <ProjectVideoPreviewItem src={tsuruNoMundoDailyVideo} />
+            </ProjectVideoPreviewSection>
             <ProjectArticleSubItem
               label={formatMessage({ id: "common.current_state" })}
               value={formatMessage({ id: "common.published" })}

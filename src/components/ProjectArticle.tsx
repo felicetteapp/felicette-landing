@@ -7,11 +7,13 @@ export const ProjectArticle = ({
   emojis,
   leadText,
   children,
+  techStack,
 }: PropsWithChildren<{
   number: string;
   title: string;
   emojis: Array<string>;
   leadText: string;
+  techStack?: Array<string>;
 }>) => {
   const emojiEl = useRef<HTMLElement>(null);
   const nextFrameTimer = useRef<NodeJS.Timeout>();
@@ -39,6 +41,15 @@ export const ProjectArticle = ({
     <article className="main__article">
       <section className="main__article__number">{number}</section>
       <section className="main__article__title">{title}</section>
+      {techStack && (
+        <section className="main__article__tech-stack">
+          {techStack.map((tech) => (
+            <span key={tech} className="main__article__tech-stack__item">
+              {tech}
+            </span>
+          ))}
+        </section>
+      )}
       <section className="main__article__emojis" ref={emojiEl}>
         {emojis}
       </section>

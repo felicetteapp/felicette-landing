@@ -123,10 +123,11 @@ export const Header = ({
         document.documentElement.scrollTop +
         "px"
     );
+
     const listener = (event: MouseEvent) => {
       mousePositionRt.current = {
         x: event.clientX,
-        y: event.clientY + document.documentElement.scrollTop,
+        y: event.clientY,
       };
       document.documentElement.style.setProperty(
         "--rt-mouse-x",
@@ -134,7 +135,7 @@ export const Header = ({
       );
       document.documentElement.style.setProperty(
         "--rt-mouse-y",
-        `${event.clientY + document.documentElement.scrollTop}px`
+        `${event.clientY}px`
       );
 
       if (mouseEventTimeout.current) {
@@ -145,7 +146,7 @@ export const Header = ({
         const prevMousePosition = mousePosition.current;
         const newMousePosition = {
           x: event.clientX,
-          y: event.clientY + document.documentElement.scrollTop,
+          y: event.clientY,
         };
         const deltaX = newMousePosition.x - prevMousePosition.x;
         const deltaY = newMousePosition.y - prevMousePosition.y;
