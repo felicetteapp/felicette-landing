@@ -29,7 +29,7 @@ export const ProjectVideoPreviewItem = ({
         muted
         playsInline
       >
-        <source src={src} type="video/mp4" />
+        <source src={src} type="video/webm" />
       </video>
     </section>
   );
