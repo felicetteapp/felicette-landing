@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useEffect, useRef } from "react";
 import { getRandomItem } from "../helpers";
+import { useUIContext } from "../hooks/useUIContext";
 
 export const ProjectArticle = ({
   number,
@@ -17,6 +18,10 @@ export const ProjectArticle = ({
 }>) => {
   const emojiEl = useRef<HTMLElement>(null);
   const nextFrameTimer = useRef<NodeJS.Timeout>();
+  const numberEl = useRef<HTMLElement>(null);
+  const articleEl = useRef<HTMLElement>(null);
+
+  const { observer, addObserverCallback } = useUIContext();
 
   useEffect(() => {
     const animateFrame = () => {
@@ -37,9 +42,69 @@ export const ProjectArticle = ({
     animateFrame();
   }, [emojis]);
 
+  useEffect(() => {
+    if (numberEl.current) {
+      observer.observe(numberEl.current);
+    }
+
+    if (articleEl.current) {
+      observer.observe(articleEl.current);
+    }
+
+    return () => {
+      if (numberEl.current) {
+        observer.unobserve(numberEl.current);
+      }
+      if (articleEl.current) {
+        observer.unobserve(articleEl.current);
+      }
+    };
+  }, [observer]);
+
+  useEffect(() => {
+    addObserverCallback((b) => {
+      const thisItemStatus = b.find((a) => a.target === numberEl.current);
+      if (!thisItemStatus) {
+        return;
+      }
+      const visible = thisItemStatus.isIntersecting;
+      if (!numberEl.current || !articleEl.current) {
+        return;
+      }
+      if (visible) {
+        numberEl.current.classList.add("main__article__number--visible");
+        articleEl.current.classList.add("main__article--visible");
+      } else {
+        numberEl.current.classList.remove("main__article__number--visible");
+      }
+    });
+  }, [addObserverCallback]);
+
+  useEffect(() => {
+    addObserverCallback((b) => {
+      const thisItemStatus = b.find((a) => a.target === articleEl.current);
+      if (!thisItemStatus) {
+        return;
+      }
+      const visible = thisItemStatus.isIntersecting;
+      if (!articleEl.current) {
+        return;
+      }
+      if (!visible) {
+        articleEl.current.classList.remove("main__article--visible");
+      }
+    });
+  }, [addObserverCallback]);
+
   return (
-    <article className="main__article">
-      <section className="main__article__number">{number}</section>
+    <article className="main__article" ref={articleEl}>
+      <section
+        className="main__article__number"
+        ref={numberEl}
+        data-label={number}
+      >
+        {number}
+      </section>
       <section className="main__article__title">{title}</section>
       {techStack && (
         <section className="main__article__tech-stack">

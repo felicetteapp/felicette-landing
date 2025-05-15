@@ -17,6 +17,7 @@ html {
   --rt-mouse-y: 50%;
   --mouse-x: 50%;
   --mouse-y: 50%;
+  --bounce-easing: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
 html,
@@ -256,7 +257,7 @@ body {
         overflow: hidden;
         line-height: 1;
         height: 1em;
-        transition: color 0.25s 0.25s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        transition: color 0.25s 0.25s var(--bounce-easing);
 
         &:hover {
           cursor: none;
@@ -287,7 +288,7 @@ body {
           line-height: 1;
           font-weight: bolder;
           color: $color-fg;
-          transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+          transition: all 0.5s var(--bounce-easing);
         }
 
         &:active {
@@ -336,7 +337,7 @@ body {
             opacity: 0;
             animation: indicator-spin 2s linear infinite,
               indicator-border-radius 6s linear infinite;
-            transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            transition: all 0.5s var(--bounce-easing);
             box-shadow: 0 0 50px $color-tertiary;
 
             &:after {
@@ -378,8 +379,8 @@ body {
             &:has(+ #{$parent}__wrapper > #{$parent}:hover) {
               border-width: 1px;
               opacity: 1;
-              transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6),
-                border-width 1s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+              transition: all 0.5s var(--bounce-easing),
+                border-width 1s var(--bounce-easing);
             }
           }
         }
@@ -409,7 +410,15 @@ body {
     margin-bottom: 1rem;
     min-height: max(100svh, calc(575px + 4rem + 1rem));
     align-content: center;
+
+    &#{&}--visible {
+      &::before {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     &::before {
+      opacity: 0;
       position: absolute;
       left: -1rem;
       bottom: -1rem;
@@ -421,7 +430,8 @@ body {
       background-size: 307px 575px;
       background-repeat: no-repeat;
       z-index: -1;
-      transition: left 0.5s ease;
+      transform: translateY(4rem);
+      transition: all 1s var(--bounce-easing);
 
       @include mixins.smallerscreens {
         left: -200px;
@@ -438,11 +448,20 @@ body {
     }
 
     &__number {
-      color: $color-secondary;
+      color: $color-tertiary;
       font-size: 4rem;
       font-family: $font-secondary;
       font-weight: 700;
       line-height: 1em;
+
+      transform: translateX(-10%);
+
+      transition: all 0.5s var(--bounce-easing);
+
+      &#{&}--visible {
+        color: $color-secondary;
+        transform: translateX(0);
+      }
     }
 
     &__lead-text,

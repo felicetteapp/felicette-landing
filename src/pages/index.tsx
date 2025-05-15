@@ -38,6 +38,7 @@ import tsuruNoMundoVideo from "../videos/mobile.webm";
 import tsuruNoMundoWidescreenVideo from "../videos/widescreen.webm";
 import tsuruNoMundoDailyVideo from "../videos/daily_mobile.webm";
 import tsuruNoMundoDailyWidescreenVideo from "../videos/daily_widescreen.webm";
+import { UIContextProvider } from "../context/UIContext/Provider";
 
 const IndexPage: React.FC<PageProps> = () => {
   const { formatMessage } = useIntl();
@@ -146,7 +147,6 @@ const IndexPage: React.FC<PageProps> = () => {
               }
             />
           </ProjectArticle>
-
           <ProjectArticle
             number="03"
             emojis={["🚀", "📦", "🔍", "🖼️"]}
@@ -287,7 +287,15 @@ const IndexPage: React.FC<PageProps> = () => {
   );
 };
 
-export default IndexPage;
+const IndexPageWrapper: React.FC<PageProps> = (props) => {
+  return (
+    <UIContextProvider>
+      <IndexPage {...props} />
+    </UIContextProvider>
+  );
+};
+
+export default IndexPageWrapper;
 
 export const Head = () => {
   return (
