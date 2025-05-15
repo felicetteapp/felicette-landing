@@ -259,6 +259,7 @@ body {
         transition: color 0.25s 0.25s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 
         &:hover {
+          cursor: none;
           color: transparent;
           transition: all 0s 0s;
 
