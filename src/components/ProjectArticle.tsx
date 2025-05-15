@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef } from "react";
+import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { getRandomItem } from "../helpers";
 import { useUIContext } from "../hooks/useUIContext";
 
@@ -21,7 +21,7 @@ export const ProjectArticle = ({
   const numberEl = useRef<HTMLElement>(null);
   const articleEl = useRef<HTMLElement>(null);
 
-  const { observer, addObserverCallback } = useUIContext();
+  const { observer, addObserverCallback, observerReady } = useUIContext();
 
   useEffect(() => {
     const animateFrame = () => {
@@ -43,6 +43,10 @@ export const ProjectArticle = ({
   }, [emojis]);
 
   useEffect(() => {
+    if (!observer || !observerReady) {
+      return;
+    }
+
     if (numberEl.current) {
       observer.observe(numberEl.current);
     }
@@ -59,7 +63,7 @@ export const ProjectArticle = ({
         observer.unobserve(articleEl.current);
       }
     };
-  }, [observer]);
+  }, [observer, observerReady]);
 
   useEffect(() => {
     addObserverCallback((b) => {
