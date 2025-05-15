@@ -231,7 +231,6 @@ export const Header = ({
           containerSize?.height ?? 10
         );
 
-        console.log(window.devicePixelRatio);
         renderer.setPixelRatio(window.devicePixelRatio);
 
         threeJsContainer.current?.appendChild(renderer.domElement);
@@ -250,7 +249,6 @@ export const Header = ({
         const size = box.getSize(new THREE.Vector3()).length();
         const center = box.getCenter(new THREE.Vector3());
 
-        //obj.position.x -= center.x;
         obj.position.y -= center.y;
         obj.position.z -= center.z;
 

@@ -12,6 +12,11 @@ $color-tertiary: #cfa7c2;
 html {
   font-family: $font-primary;
   overflow-x: hidden;
+
+  --rt-mouse-x: 50%;
+  --rt-mouse-y: 50%;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
 html,
@@ -85,8 +90,6 @@ body {
       rgba($color-bg, 0.9) 34%,
       $color-bg 65%
     );
-
-    //    background-color: blue;
   }
 
   &::before {
@@ -126,6 +129,27 @@ body {
 #___gatsby {
   z-index: 3;
   position: relative;
+}
+
+@keyframes indicator-border-radius {
+  0% {
+    border-radius: 50% 50% 50% 50%;
+  }
+  50% {
+    border-radius: 50% 12% 50% 12%;
+  }
+  100% {
+    border-radius: 50% 50% 50% 50%;
+  }
+}
+
+@keyframes indicator-spin {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
 }
 
 .header {
@@ -215,8 +239,10 @@ body {
       font-weight: normal;
       text-align: right;
       margin-right: -1rem;
+      position: relative;
 
       &__item {
+        position: relative;
         display: inline-block;
         padding: 0 1rem;
         margin-right: 0.25rem;
@@ -227,6 +253,41 @@ body {
         font-size: inherit;
         font-family: inherit;
         text-decoration: none;
+        overflow: hidden;
+        line-height: 1;
+        height: 1em;
+        transition: color 0.25s 0.25s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+        &:hover {
+          color: transparent;
+          transition: all 0s 0s;
+
+          &:active {
+            &::after {
+              color: $color-bg;
+            }
+          }
+          &::after {
+            color: $color-tertiary;
+            transform: translateY(0);
+          }
+        }
+
+        &::after {
+          position: absolute;
+          padding: 0 1rem;
+          left: 0;
+          top: 0;
+          transform: translateY(100%);
+          content: attr(data-label);
+          display: block;
+          width: 100%;
+          height: 1em;
+          line-height: 1;
+          font-weight: bolder;
+          color: $color-fg;
+          transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
 
         &:active {
           color: $color-bg;
@@ -235,6 +296,12 @@ body {
 
         &--active {
           color: $color-secondary;
+
+          &:hover {
+            &::after {
+              color: $color-secondary;
+            }
+          }
         }
 
         &--separator {
@@ -251,6 +318,69 @@ body {
           white-space: nowrap;
           overflow: hidden;
           overflow-x: auto;
+          position: relative;
+        }
+
+        &__hover {
+          &__indicator {
+            position: absolute;
+            top: var(--hover-mouse-y);
+            left: var(--hover-mouse-x);
+            width: 75px;
+            height: 75px;
+            border-radius: 25%;
+            border: 0 solid $color-tertiary;
+            background: $color-bg;
+            border-width: 0;
+            opacity: 0;
+            animation: indicator-spin 2s linear infinite,
+              indicator-border-radius 6s linear infinite;
+            transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            box-shadow: 0 0 50px $color-tertiary;
+
+            &:after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              background: transparent;
+              border: 1px solid $color-tertiary;
+              opacity: 1;
+              animation: indicator-border-radius 4s linear infinite;
+              transform: translate(-50%, -50%);
+            }
+
+            &:before {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 99%;
+              height: 99%;
+              border-radius: 50%;
+              background: transparent;
+              border: 1px solid $color-tertiary;
+              opacity: 1;
+              transform: translateX(-50%) translateY(-50%);
+            }
+          }
+        }
+      }
+
+      &__item {
+        $parent: &;
+        &__hover {
+          &__indicator {
+            &:has(+ #{$parent}__wrapper > #{$parent}:hover) {
+              border-width: 1px;
+              opacity: 1;
+              transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6),
+                border-width 1s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            }
+          }
         }
       }
     }
