@@ -242,6 +242,8 @@ body {
       margin-right: -1rem;
       position: relative;
 
+      cursor: url("../images/cursor-language-selector.png") 12 12, crosshair;
+
       &__item {
         position: relative;
         display: inline-block;
@@ -260,7 +262,7 @@ body {
         transition: color 0.25s 0.25s var(--bounce-easing);
 
         &:hover {
-          cursor: none;
+          cursor: url("../images/cursor-language-selector.png") 12 12, crosshair;
           color: transparent;
           transition: all 0s 0s;
 
