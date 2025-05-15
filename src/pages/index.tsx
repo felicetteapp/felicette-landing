@@ -43,7 +43,7 @@ import { UIContextProvider } from "../context/UIContext/Provider";
 const IndexPage: React.FC<PageProps> = () => {
   const { formatMessage } = useIntl();
   return (
-    <>
+    <UIContextProvider>
       <main className="wrapper">
         <Header />
         <Main>
@@ -283,19 +283,11 @@ const IndexPage: React.FC<PageProps> = () => {
         <Footer data={{}} />
       </main>
       <DeepSpace />
-    </>
-  );
-};
-
-const IndexPageWrapper: React.FC<PageProps> = (props) => {
-  return (
-    <UIContextProvider>
-      <IndexPage {...props} />
     </UIContextProvider>
   );
 };
 
-export default IndexPageWrapper;
+export default IndexPage;
 
 export const Head = () => {
   return (
