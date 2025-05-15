@@ -66,11 +66,11 @@ export const LanguageSelector = () => {
 
           section.style.setProperty(
             "--hover-mouse-y",
-            `${positionAdjustedToCenterOfItem.top + window.scrollY}px`
+            `${positionAdjustedToCenterOfItem.top}px`
           );
           section.style.setProperty(
             "--hover-mouse-x",
-            `${positionAdjustedToCenterOfItem.left + window.scrollX}px`
+            `${positionAdjustedToCenterOfItem.left}px`
           );
         }
       } else {
