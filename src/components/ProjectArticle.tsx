@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
-import { getRandomItem } from "../helpers";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
+import { easeInCubic, getRandomItem } from "../helpers";
 import { useUIContext } from "../hooks/useUIContext";
 
 export const ProjectArticle = ({
@@ -20,6 +20,7 @@ export const ProjectArticle = ({
   const nextFrameTimer = useRef<NodeJS.Timeout>();
   const numberEl = useRef<HTMLElement>(null);
   const articleEl = useRef<HTMLElement>(null);
+  const titleEl = useRef<HTMLElement>(null);
 
   const { observer, addObserverCallback, observerReady } = useUIContext();
 
@@ -72,30 +73,16 @@ export const ProjectArticle = ({
         return;
       }
       const visible = thisItemStatus.isIntersecting;
-      if (!numberEl.current || !articleEl.current) {
+      if (!numberEl.current || !articleEl.current || !titleEl.current) {
         return;
       }
       if (visible) {
         numberEl.current.classList.add("main__article__number--visible");
         articleEl.current.classList.add("main__article--visible");
+        titleEl.current.classList.add("main__article__title--visible");
       } else {
         numberEl.current.classList.remove("main__article__number--visible");
-      }
-    });
-  }, [addObserverCallback]);
-
-  useEffect(() => {
-    addObserverCallback((b) => {
-      const thisItemStatus = b.find((a) => a.target === articleEl.current);
-      if (!thisItemStatus) {
-        return;
-      }
-      const visible = thisItemStatus.isIntersecting;
-      if (!articleEl.current) {
-        return;
-      }
-      if (!visible) {
-        articleEl.current.classList.remove("main__article--visible");
+        titleEl.current.classList.remove("main__article__title--visible");
       }
     });
   }, [addObserverCallback]);
@@ -109,11 +96,23 @@ export const ProjectArticle = ({
       >
         {number}
       </section>
-      <section className="main__article__title">{title}</section>
+      <section
+        className="main__article__title"
+        ref={titleEl}
+        data-label={title}
+      >
+        {title}
+      </section>
       {techStack && (
         <section className="main__article__tech-stack">
-          {techStack.map((tech) => (
-            <span key={tech} className="main__article__tech-stack__item">
+          {techStack.map((tech, i) => (
+            <span
+              key={tech}
+              className="main__article__tech-stack__item"
+              data-label={tech}
+              data-delay={250 + easeInCubic((i + 1) / techStack.length) * 750}
+              xdata-delay={250 + (i + 1) * 500}
+            >
               {tech}
             </span>
           ))}

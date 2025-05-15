@@ -9,6 +9,12 @@ $color-primary: #445878;
 $color-secondary: #92cdcf;
 $color-tertiary: #cfa7c2;
 
+@property --tech-stack-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 10deg;
+}
+
 html {
   font-family: $font-primary;
   overflow-x: hidden;
@@ -59,6 +65,15 @@ html {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-tech-stack-angle {
+  0% {
+    --tech-stack-angle: 0deg;
+  }
+  100% {
+    --tech-stack-angle: 360deg;
   }
 }
 
@@ -413,10 +428,41 @@ body {
     min-height: max(100svh, calc(575px + 4rem + 1rem));
     align-content: center;
 
+    $parent: &;
+
+    &__emojis,
+    &__lead-text,
+    &__video-preview,
+    &__sub-item__label,
+    &__sub-item__value {
+      opacity: 0;
+      transition: opacity 1s 0 var(--bounce-easing);
+    }
+
     &#{&}--visible {
       &::before {
         opacity: 1;
+        transition: all 1s 1.5s var(--bounce-easing);
         transform: translateY(0);
+      }
+
+      #{$parent} {
+        &__emojis,
+        &__lead-text,
+        &__video-preview,
+        &__sub-item__label,
+        &__sub-item__value {
+          opacity: 1;
+          transition: opacity 2s 1s var(--bounce-easing);
+        }
+        &__tech-stack {
+          &__item {
+            opacity: 1;
+            animation: spin-tech-stack-angle 2s linear infinite both;
+            animation-delay: attr(data-delay ms);
+            transition: all 1s attr(data-delay ms) var(--bounce-easing);
+          }
+        }
       }
     }
     &::before {
@@ -450,7 +496,7 @@ body {
     }
 
     &__number {
-      color: $color-tertiary;
+      color: $color-primary;
       font-size: 4rem;
       font-family: $font-secondary;
       font-weight: 700;
@@ -487,20 +533,49 @@ body {
       column-gap: 0.5rem;
 
       &__item {
+        --tech-stack-color: #{$color-tertiary};
+
         font-weight: 700;
         font-family: $font-secondary;
-        color: $color-tertiary;
-        border-width: thin;
-        border-style: solid;
-        border-color: $color-tertiary;
-        background-color: $color-bg;
+        color: transparent;
         padding: 0.25rem 0.5rem;
         border-radius: 0.25rem;
         font-size: 0.75rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        background-image: conic-gradient(
+          from var(--tech-stack-angle),
+          $color-bg,
+          var(--tech-stack-color),
+          $color-bg
+        );
+
+        transition: all 0.5s 0.5s var(--bounce-easing);
+
+        &::after {
+          pointer-events: all;
+
+          font-size: inherit;
+          content: attr(data-label);
+          color: var(--tech-stack-color);
+          background: $color-bg;
+          font-weight: inherit;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          left: 1px;
+          top: 1px;
+          bottom: 1px;
+          right: 1px;
+          border-radius: 4px;
+        }
 
         &:nth-child(odd) {
-          color: $color-secondary;
-          border-color: $color-secondary;
+          --tech-stack-color: #{$color-secondary};
         }
       }
     }
@@ -509,7 +584,55 @@ body {
       font-size: 2rem;
       font-family: $font-secondary;
       font-weight: 700;
-      line-height: 1em;
+      line-height: 1.2;
+      display: block;
+      color: transparent;
+      position: relative;
+      overflow: hidden;
+
+      transition: all 1s var(--bounce-easing);
+
+      &::before,
+      &::after {
+        font-size: 2rem;
+        line-height: 1.2;
+        transition: all 0.5s 0.5s var(--bounce-easing);
+        pointer-events: none;
+      }
+
+      &#{&}--visible {
+        &::before {
+          transform: translateY(-2rem);
+          color: transparent;
+        }
+
+        &::after {
+          transform: translateY(0);
+          color: $color-fg;
+        }
+      }
+
+      &::before {
+        content: attr(data-label);
+        color: $color-primary;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        transform: translateY(0);
+      }
+
+      &::after {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        transform: translateY(2rem);
+        color: transparent;
+      }
     }
 
     &__video-preview {
