@@ -183,6 +183,7 @@ body {
     max-width: 100%;
     transform: translate(calc(50% + 1rem));
     overflow: hidden;
+    cursor: url("../images/cursor-language-selector.png") 12 12, crosshair;
 
     canvas {
       aspect-ratio: 1/1.5;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { LanguageSelector } from "./LanguageSelector";
-import { getRandomItem } from "../helpers";
+import { easeInOutBack, easeTo, getRandomItem } from "../helpers";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass";
@@ -251,6 +251,11 @@ export const Header = ({
 
         obj.position.y -= center.y;
         obj.position.z -= center.z;
+        obj.rotation.y = -90 * (Math.PI / 180);
+
+        const initialRotation = {
+          y: obj.rotation.y,
+        };
 
         defaultCamera.near = size / 100;
         defaultCamera.far = size * 100;
@@ -316,23 +321,68 @@ export const Header = ({
 
         let rotationDirection = 1;
         let lastTime = performance.now();
+        let canvasHovering = 0;
+        let canvasHoveringRotationY = 0;
+
+        let distanceToTargetRotation = 0;
 
         const calculateRotationDirection = () => {
           const containerPos =
             threeJsContainer.current?.getBoundingClientRect() || {
               left: 0,
               width: 0,
+              height: 0,
             };
           const centerOfTheContainer =
             containerPos.left + containerPos.width / 2;
           const x = mousePositionRt.current.x - centerOfTheContainer;
           rotationDirection = x / (window.innerWidth / 2);
+
+          const isCanvasHovering =
+            x > -containerPos.width / 2 &&
+            x < containerPos.width / 2 &&
+            mousePositionRt.current.y > 0 &&
+            mousePositionRt.current.y < containerPos.height;
+
+          if (isCanvasHovering && !canvasHovering) {
+            canvasHovering = Date.now();
+            canvasHoveringRotationY = obj.rotation.y;
+            distanceToTargetRotation =
+              initialRotation.y - canvasHoveringRotationY;
+          } else if (!isCanvasHovering) {
+            canvasHovering = 0;
+          }
         };
 
         const animateHorizontalRotation = (currentTime: number) => {
           const deltaTime = currentTime - lastTime;
           lastTime = currentTime;
-          obj.rotation.y += 0.00125 * rotationDirection * deltaTime;
+
+          if (canvasHovering) {
+            const rotationDuration = Math.max(
+              500,
+              Math.abs(distanceToTargetRotation) * 500
+            );
+            const rotationProgress = easeTo({
+              start: canvasHoveringRotationY,
+              end: initialRotation.y,
+              duration: rotationDuration,
+              startTime: canvasHovering,
+              easingFunction: easeInOutBack,
+            });
+
+            secondLight.color = new THREE.Color(0xcfa7c2);
+
+            obj.rotation.y = rotationProgress;
+          } else {
+            secondLight.color = new THREE.Color(0x92cdcf);
+            obj.rotation.y += 0.00125 * rotationDirection * deltaTime;
+            if (obj.rotation.y > Math.PI) {
+              obj.rotation.y -= Math.PI * 2;
+            } else if (obj.rotation.y < -Math.PI) {
+              obj.rotation.y += Math.PI * 2;
+            }
+          }
           composer.render();
 
           calculateRotationDirection();
@@ -385,11 +435,17 @@ export const Header = ({
           style={{
             opacity: 0,
           }}
+          onClick={() => {
+            window.location.reload();
+          }}
         />
         <div
           ref={threeJsContainer}
           style={{
             display: "none",
+          }}
+          onClick={() => {
+            window.location.reload();
           }}
           className="header__three-js-container"
         />
