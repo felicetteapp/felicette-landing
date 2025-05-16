@@ -111,7 +111,6 @@ export const ProjectArticle = ({
               className="main__article__tech-stack__item"
               data-label={tech}
               data-delay={250 + easeInCubic((i + 1) / techStack.length) * 750}
-              xdata-delay={250 + (i + 1) * 500}
             >
               {tech}
             </span>

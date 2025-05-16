@@ -461,6 +461,17 @@ body {
             animation: spin-tech-stack-angle 2s linear infinite both;
             animation-delay: attr(data-delay ms);
             transition: all 1s attr(data-delay ms) var(--bounce-easing);
+
+            @supports not (x: attr(x type(#{"*"}))) {
+              animation-delay: 0.5s;
+
+              @for $i from 1 through 20 {
+                &:nth-child(#{$i}) {
+                  animation-delay: #{250 + ($i * 100)}ms;
+                  transition: all 1s #{250 + ($i * 100)}ms var(--bounce-easing);
+                }
+              }
+            }
           }
         }
       }
