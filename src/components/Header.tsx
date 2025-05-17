@@ -450,7 +450,7 @@ export const Header = ({
           className="header__three-js-container"
         />
         <div className="header__main-title__wrapper">
-          <h2 className="header__main-title">{t.projects}</h2>
+          <h2 className="header__main-title"></h2>
         </div>
         <h1 className="header__felicette-title__start" ref={felicetteEl}>
           felicette
@@ -462,8 +462,9 @@ export const Header = ({
           language / lingua / idioma / langue
         </section>
         <LanguageSelector />
-        <section className="header__bottom-separator" />
+        <section className="header__bottom-separator"></section>
       </header>
+      <h2 className="header__bottom-separator__title">{t.projects}</h2>
     </>
   );
 };

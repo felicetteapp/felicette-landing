@@ -94,7 +94,6 @@ export const LanguageSelector = () => {
         <Divider />
         <LanguageSelectorItem lang={"fr"} onRef={addItemRef} />
       </main>
-      <section className="header__spacer"></section>
     </section>
   );
 };
