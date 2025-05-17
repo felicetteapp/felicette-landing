@@ -6,6 +6,9 @@
     "see_more": "Ver más",
     "source_code": "Código fuente"
   },
+  "header": {
+    "projects": "Proyectos:"
+  },
   "felicette": "Felicette",
   "felicette_img_loading": {
     "lead_text": "Un componente de carga de imagen headless que utiliza la API Intersection Observer",

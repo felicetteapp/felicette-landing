@@ -6,6 +6,9 @@
     "see_more": "Ver mais",
     "source_code": "Código fonte"
   },
+  "header": {
+    "projects": "Projetos:"
+  },
   "felicette": "Felicette",
   "felicette_img_loading": {
     "lead_text": "Um componente de carregamento de imagem headless que usa a API Intersection Observer",
@@ -23,11 +26,11 @@
     "about": "Felicette é um projeto open-source de {link}. Feito com amor e gatos desde Curitiba, Brasil"
   },
   "tsuru_no_mundo": {
-    "lead_text": "Página de destino para o projeto Tsuru No Mundo incluindo um belo slider de fotografias",
+    "lead_text": "Landing page para o projeto Tsuru No Mundo incluindo um belo slider de fotografias",
     "title": "Tsuru No Mundo"
   },
   "tsuru_no_mundo_daily": {
-    "lead_text": "O projeto diário do projeto Tsuru No Mundo. Uma página estática feita com eleventy com uma enorme grade de imagens com carregamento preguiçoso (usando felicette-img-loading)",
+    "lead_text": "O projeto diário do projeto Tsuru No Mundo. Uma página estática feita com eleventy com uma enorme grade de imagens com lazy-loading (usando felicette-img-loading)",
     "title": "Tsuru No Mundo Diário"
   },
   "deep_space": {

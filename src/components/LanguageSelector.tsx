@@ -39,6 +39,7 @@ export const Divider = () => {
 export const LanguageSelector = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const itemsRef = useRef<HTMLAnchorElement[]>([]);
+  const currentLang = useCurrentLang();
 
   const addItemRef = (el: HTMLAnchorElement) => {
     if (el && !itemsRef.current.includes(el)) {
@@ -46,41 +47,51 @@ export const LanguageSelector = () => {
     }
   };
   useEffect(() => {
+    const setVariablesFromTarget = (target: HTMLElement) => {
+      const position = target.getBoundingClientRect();
+      const section = sectionRef.current;
+      if (!section) {
+        return;
+      }
+      const positionRelativeToSection = {
+        top: position.top - section.getBoundingClientRect().top,
+        left: position.left - section.getBoundingClientRect().left,
+      };
+      const positionAdjustedToCenterOfItem = {
+        top: positionRelativeToSection.top + position.height / 2,
+        left: positionRelativeToSection.left + position.width / 2,
+      };
+      section.style.setProperty(
+        "--hover-mouse-y",
+        `${positionAdjustedToCenterOfItem.top}px`
+      );
+      section.style.setProperty(
+        "--hover-mouse-x",
+        `${positionAdjustedToCenterOfItem.left}px`
+      );
+    };
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const targetItem = itemsRef.current.find((item) => item === target);
-      if (targetItem) {
-        const section = sectionRef.current;
-        if (section) {
-          const position = targetItem.getBoundingClientRect();
-
-          const positionRelativeToSection = {
-            top: position.top - section.getBoundingClientRect().top,
-            left: position.left - section.getBoundingClientRect().left,
-          };
-
-          const positionAdjustedToCenterOfItem = {
-            top: positionRelativeToSection.top + position.height / 2,
-            left: positionRelativeToSection.left + position.width / 2,
-          };
-
-          section.style.setProperty(
-            "--hover-mouse-y",
-            `${positionAdjustedToCenterOfItem.top}px`
-          );
-          section.style.setProperty(
-            "--hover-mouse-x",
-            `${positionAdjustedToCenterOfItem.left}px`
-          );
-        }
-      } else {
+      if (!targetItem) {
+        return;
       }
+      setVariablesFromTarget(targetItem);
     };
+
+    const currentLangItem = itemsRef.current.find((item) => {
+      return item.dataset.label === currentLang;
+    });
+
+    if (currentLangItem) {
+      setVariablesFromTarget(currentLangItem);
+    }
+
     document.addEventListener("mouseover", handleMouseOver);
     return () => {
       document.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [currentLang]);
 
   return (
     <section className="header__language__selector" ref={sectionRef}>

@@ -12,6 +12,7 @@ import felicetteLogo from "../images/felicette_logo.png";
 import WebGL from "three/examples/jsm/capabilities/WebGL.js";
 
 import * as THREE from "three";
+import { useIntl } from "gatsby-plugin-intl";
 const tdmodel = "/felicette_helmet2.glb";
 
 const loader = new GLTFLoader();
@@ -31,6 +32,13 @@ export const Header = ({
   const felicetteEl = useRef<HTMLHeadingElement>(null);
   const appEl = useRef<HTMLHeadingElement>(null);
   const nextFrameTimer = useRef<NodeJS.Timeout>();
+  const { formatMessage } = useIntl();
+  const mousePosition = useRef({ x: 0, y: 0 });
+  const mousePositionRt = useRef({ x: 0, y: 0 });
+  const mouseEventTimeout = useRef<NodeJS.Timeout>();
+  const movingRocketTimeout = useRef<NodeJS.Timeout>();
+  const threeJsContainer = useRef<HTMLDivElement>(null);
+  const logoImg = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const felicetteElText = felicetteEl.current?.innerText ?? "";
@@ -39,6 +47,17 @@ export const Header = ({
     const appParts = appElText.split("");
     const totalParts = [...felicetteParts, ...appParts];
     const pos = felicetteParts.length;
+
+    const storedState = window.localStorage.getItem("felicette-header-state");
+    if (storedState) {
+      const parsedState = JSON.parse(storedState);
+      if (parsedState.totalParts) {
+        totalParts.length = 0;
+        parsedState.totalParts.forEach((part: string) => {
+          totalParts.push(part);
+        });
+      }
+    }
 
     const emojis = ["🚀", "🧑‍🚀", "👽", "🛸", "⭐", "🌞", "🌍", "🐱"];
 
@@ -77,6 +96,14 @@ export const Header = ({
           )}</span>`
         );
 
+      const state = {
+        totalParts,
+      };
+
+      window.localStorage.setItem(
+        "felicette-header-state",
+        JSON.stringify(state)
+      );
       nextFrameTimer.current = setTimeout(() => {
         animateFrame();
       }, 500);
@@ -91,10 +118,6 @@ export const Header = ({
     };
   }, []);
 
-  const mousePosition = useRef({ x: 0, y: 0 });
-  const mousePositionRt = useRef({ x: 0, y: 0 });
-  const mouseEventTimeout = useRef<NodeJS.Timeout>();
-  const movingRocketTimeout = useRef<NodeJS.Timeout>();
   useEffect(() => {
     mousePosition.current = {
       x: document.documentElement.clientWidth / 2,
@@ -102,26 +125,40 @@ export const Header = ({
         document.documentElement.clientHeight / 2 +
         document.documentElement.scrollTop,
     };
+
+    const storedMousePosition = window.localStorage.getItem(
+      "felicette-mouse-position"
+    );
+    const storedMousePositionRt = window.localStorage.getItem(
+      "felicette-rt-mouse-position"
+    );
+    if (storedMousePosition) {
+      const parsedMousePosition = JSON.parse(storedMousePosition);
+      mousePosition.current = parsedMousePosition;
+    }
+
+    if (storedMousePositionRt) {
+      const parsedMousePositionRt = JSON.parse(storedMousePositionRt);
+      mousePositionRt.current = parsedMousePositionRt;
+    }
+
     document.documentElement.style.setProperty("--mouse-angle", `0deg`);
     document.documentElement.style.setProperty(
       "--mouse-x",
-      document.documentElement.clientWidth / 2 + "px"
+      mousePosition.current.x + "px"
     );
     document.documentElement.style.setProperty(
       "--rt-mouse-x",
-      document.documentElement.clientWidth / 2 + "px"
+      mousePositionRt.current.x + "px"
     );
     document.documentElement.style.setProperty(
       "--mouse-y",
-      document.documentElement.clientHeight / 2 +
-        document.documentElement.scrollTop +
-        "px"
+      mousePosition.current.y + "px"
     );
+
     document.documentElement.style.setProperty(
       "--rt-mouse-y",
-      document.documentElement.clientHeight / 2 +
-        document.documentElement.scrollTop +
-        "px"
+      mousePositionRt.current.y + "px"
     );
 
     const listener = (event: MouseEvent) => {
@@ -187,11 +224,18 @@ export const Header = ({
 
     return () => {
       document.removeEventListener("mousemove", listener);
+
+      window.localStorage.setItem(
+        "felicette-rt-mouse-position",
+        JSON.stringify(mousePositionRt.current)
+      );
+
+      window.localStorage.setItem(
+        "felicette-mouse-position",
+        JSON.stringify(mousePosition.current)
+      );
     };
   }, []);
-
-  const threeJsContainer = useRef<HTMLDivElement>(null);
-  const logoImg = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (!threeJsContainer.current) {
@@ -203,6 +247,8 @@ export const Header = ({
       threeJsContainer.current.style.setProperty("display", "none");
       return;
     }
+
+    const cleanupFunctions: (() => void)[] = [];
 
     loader.load(
       tdmodel,
@@ -256,6 +302,16 @@ export const Header = ({
         const initialRotation = {
           y: obj.rotation.y,
         };
+
+        const storedRotation = window.localStorage.getItem(
+          "felicette-3d-model-rotation"
+        );
+        if (storedRotation) {
+          const parsedRotation = JSON.parse(storedRotation);
+          obj.rotation.x = parsedRotation.x;
+          obj.rotation.y = parsedRotation.y;
+          obj.rotation.z = parsedRotation.z;
+        }
 
         defaultCamera.near = size / 100;
         defaultCamera.far = size * 100;
@@ -320,11 +376,20 @@ export const Header = ({
         composer.render();
 
         let rotationDirection = 1;
+
+        const storedRotationDirection = window.localStorage.getItem(
+          "felicette-3d-rotation-direction"
+        );
+        if (storedRotationDirection) {
+          const parsedRotationDirection = JSON.parse(storedRotationDirection);
+          rotationDirection = parsedRotationDirection;
+        }
+
         let lastTime = performance.now();
         let canvasHovering = 0;
         let canvasHoveringRotationY = 0;
-
         let distanceToTargetRotation = 0;
+        let frame = 0;
 
         const calculateRotationDirection = () => {
           const containerPos =
@@ -387,14 +452,60 @@ export const Header = ({
 
           calculateRotationDirection();
 
-          requestAnimationFrame(animateHorizontalRotation);
+          frame = requestAnimationFrame(animateHorizontalRotation);
         };
 
-        requestAnimationFrame(animateHorizontalRotation);
+        frame = requestAnimationFrame(animateHorizontalRotation);
+
+        cleanupFunctions.push(() => {
+          window.localStorage.setItem(
+            "felicette-3d-model-rotation",
+            JSON.stringify({
+              x: obj.rotation.x,
+              y: obj.rotation.y,
+              z: obj.rotation.z,
+            })
+          );
+
+          window.localStorage.setItem(
+            "felicette-3d-rotation-direction",
+            JSON.stringify(rotationDirection)
+          );
+        });
+
+        cleanupFunctions.push(() => {
+          if (frame) {
+            cancelAnimationFrame(frame);
+          }
+        });
+
+        cleanupFunctions.push(() => {
+          if (renderer) {
+            renderer.dispose();
+          }
+          if (composer) {
+            composer.dispose();
+          }
+          if (outlinePass) {
+            outlinePass.dispose();
+          }
+          if (effectFXAA) {
+            effectFXAA.dispose();
+          }
+          if (outputPass) {
+            outputPass.dispose();
+          }
+          if (light) {
+            light.dispose();
+          }
+          if (secondLight) {
+            secondLight.dispose();
+          }
+        });
 
         //handle window resize
 
-        window.addEventListener("resize", () => {
+        const handleResize = () => {
           const containerSize =
             threeJsContainer.current?.getBoundingClientRect();
 
@@ -416,13 +527,23 @@ export const Header = ({
             1 / (containerSize?.width || 1),
             1 / (containerSize?.height || 1)
           );
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        cleanupFunctions.push(() => {
+          window.removeEventListener("resize", handleResize);
         });
       },
       undefined,
-      function (error) {
-        console.error(error);
-      }
+      function () {}
     );
+
+    return () => {
+      cleanupFunctions.forEach((cleanup) => {
+        cleanup();
+      });
+    };
   }, []);
   return (
     <>
@@ -464,7 +585,9 @@ export const Header = ({
         <LanguageSelector />
         <section className="header__bottom-separator"></section>
       </header>
-      <h2 className="header__bottom-separator__title">{t.projects}</h2>
+      <h2 className="header__bottom-separator__title">
+        {formatMessage({ id: "header.projects" })}
+      </h2>
     </>
   );
 };
