@@ -11,9 +11,11 @@ export const ProjectVideoPreviewSection = ({
 export const ProjectVideoPreviewItem = ({
   src,
   span = 1,
+  aspectRatio = 16 / 9,
 }: {
   src: string;
   span?: number;
+  aspectRatio?: number;
 }) => {
   return (
     <section
@@ -25,6 +27,9 @@ export const ProjectVideoPreviewItem = ({
       <video
         className="main__article__video-preview__item__video"
         autoPlay
+        style={{
+          aspectRatio: `${aspectRatio}`,
+        }}
         loop
         muted
         playsInline

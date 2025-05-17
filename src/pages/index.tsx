@@ -27,7 +27,7 @@ import {
   ProjectArticleSubItemLinkList,
 } from "../components/ProjectArticle";
 import { Footer } from "../components/Footer";
-import { useIntl } from "gatsby-plugin-intl";
+import { IntlProvider, useIntl } from "gatsby-plugin-intl";
 import { DeepSpace } from "../components/DeepSpace";
 import {
   ProjectVideoPreviewItem,
@@ -60,8 +60,12 @@ const IndexPage: React.FC<PageProps> = () => {
               <ProjectVideoPreviewItem
                 src={tsuruNoMundoWidescreenVideo}
                 span={3}
+                aspectRatio={1440 / 1080}
               />
-              <ProjectVideoPreviewItem src={tsuruNoMundoVideo} />
+              <ProjectVideoPreviewItem
+                src={tsuruNoMundoVideo}
+                aspectRatio={0 / 21}
+              />
             </ProjectVideoPreviewSection>
             <ProjectArticleSubItem
               label={formatMessage({ id: "common.current_state" })}
@@ -115,8 +119,12 @@ const IndexPage: React.FC<PageProps> = () => {
               <ProjectVideoPreviewItem
                 src={tsuruNoMundoDailyWidescreenVideo}
                 span={3}
+                aspectRatio={1440 / 1080}
               />
-              <ProjectVideoPreviewItem src={tsuruNoMundoDailyVideo} />
+              <ProjectVideoPreviewItem
+                src={tsuruNoMundoDailyVideo}
+                aspectRatio={0 / 21}
+              />
             </ProjectVideoPreviewSection>
             <ProjectArticleSubItem
               label={formatMessage({ id: "common.current_state" })}
@@ -289,13 +297,35 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage;
 
-export const Head = () => {
+export const Head = (
+  props: PageProps<
+    unknown,
+    { intl: { language: string; messages: Record<string, string> } }
+  >
+) => {
+  const intl = props.pageContext.intl;
+  return (
+    <IntlProvider
+      locale={intl.language}
+      defaultLocale="en"
+      messages={intl.messages}
+    >
+      <title>Felicette</title>
+      <IntlMetadata />
+    </IntlProvider>
+  );
+};
+
+const IntlMetadata = () => {
+  const { formatMessage } = useIntl();
   return (
     <>
-      <title>Felicette</title>
       <meta
         name="description"
-        content="Felicette is an open-source project by Facundo Leites. Made with love and cats from Curitiba, Brazil"
+        content={formatMessage(
+          { id: "footer.about" },
+          { link: "Facundo Leites" }
+        )}
       />
     </>
   );
