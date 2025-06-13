@@ -2,7 +2,7 @@
 @use "mixins";
 
 $font-secondary: "Space Mono", sans-serif;
-$font-primary: "Roboto", sans-serif;
+$font-primary: "Roboto Variable", sans-serif;
 $color-bg: #1c1d21;
 $color-fg: #eeeff7;
 $color-primary: #445878;
@@ -467,7 +467,7 @@ body {
     column-gap: 1rem;
     row-gap: 1rem;
     margin-bottom: calc((100svh - var(--min-height)) / 2);
-    background: rgba($color-bg, 0.6);
+    background: rgba($color-bg, 0);
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-radius: 2rem;
@@ -478,10 +478,6 @@ body {
     @include mixins.smallerscreens {
       --min-height: 75svh;
       margin-bottom: calc((100svh - var(--min-height)) / 2);
-      background: rgba($color-bg, 0.9);
-    }
-
-    &:hover {
       background: rgba($color-bg, 0.9);
     }
 
@@ -498,6 +494,14 @@ body {
     }
 
     &#{&}--visible {
+      background: rgba($color-bg, 0.6);
+      transition: all 2s linear;
+
+      &:hover {
+        background: rgba($color-bg, 0.9);
+        transition: all 0.5s linear;
+      }
+
       &::before {
         opacity: 1;
         transition: all 1s 1.5s var(--bounce-easing);
@@ -783,7 +787,6 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba($color-bg, 0.9);
         video {
           max-width: 100%;
         }
