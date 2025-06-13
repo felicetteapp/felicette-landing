@@ -6,6 +6,7 @@ import "@fontsource/space-mono/400-italic.css";
 import "@fontsource/space-mono/700.css";
 import "@fontsource/space-mono/700-italic.css";
 import "@fontsource-variable/roboto/index.css";
+import "lenis/dist/lenis.css";
 
 import { Header } from "../components/Header";
 import { Main } from "../components/Main";
